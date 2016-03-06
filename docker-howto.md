@@ -85,5 +85,26 @@ How to setup a container with two network interfaces:
 If all you need is static addressing with a single network, you may setup
 networking during container creation:
 
-```sudo docker run -it --net=isolated_nw --name=node1 --ip=10.0.1.2 fedora:20 /bin/bash
+```
+sudo docker run -it --net=isolated_nw --name=node1 --ip=10.0.1.2 fedora:20 /bin/bash
+```
+
+## Systemd inside container
+
+To run the `systemd` inside a Docker container, a special version of the
+container has to be used, for instance fedora-rawhide:
+
+https://hub.docker.com/r/fedora/systemd-systemd/
+
+Run it in privileged mode and mount the cgroup filesystem (with read-only
+access):
+
+```
+sudo docker run --privileged -it -e 'container=docker' -v /sys/fs/cgroup:/sys/fs/cgroup:ro fedora/systemd-systemd /bin/bash
+```
+
+Then, inside the container, issue:
+
+```
+/lib/systemd/systemd --system &
 ```
