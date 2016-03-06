@@ -108,3 +108,19 @@ Then, inside the container, issue:
 ```
 /lib/systemd/systemd --system &
 ```
+
+### Images created with `ENTRYPOINT`
+
+* start it in detached mode:
+
+  ```
+  sudo docker run --privileged -itd -v /sys/fs/cgroup:/sys/fs/cgroup:ro milcom/centos7-systemd
+  ```
+
+* and then run bash inside:
+
+  ```
+  sudo docker exec -it 26d7df051cd8 /bin/bash
+  ```
+
+Alternatively, you may use `--entrypoint` to override the default one.
