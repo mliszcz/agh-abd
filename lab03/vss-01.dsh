@@ -1,0 +1,31 @@
+# Diskshadow syntax: https://technet.microsoft.com/en-us/library/cc772172.aspx
+# VSS: https://technet.microsoft.com/en-us/library/ee923636%28v=ws.10%29.aspx
+
+# persistent - Specifies that the shadow copy persists across program exit, reset, or restart.
+# nowriters - Specifies that all writers are excluded.
+set context persistent nowriters
+
+# Sets the name and location of the shadow creation metadata file
+set metadata c:\diskshadowdata\vss-01-metadata.cab
+
+set verbose on
+
+# Starts a full backup session.
+begin backup
+
+# Adds volumes to the set of volumes that are to be shadow copied, or adds aliases to the alias environment.
+add volume c: alias SystemVolumeShadow
+add volume e: alias Disk1GAShadow
+
+# Starts the shadow copy creation process, using the current context and option settings.
+create
+
+# Exposes a persistent shadow copy as a drive letter, share, or mount point.
+expose %SystemVolumeShadow% p:
+expose %Disk1GAShadow% q:
+
+# Executes a file on the local computer.
+exec c:\diskshadowdata\backupscript.cmd
+
+# Ends a full backup session and issues a BackupComplete event with the appropriate writer state, if needed.
+end backup

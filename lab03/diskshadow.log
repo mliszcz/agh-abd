@@ -1,0 +1,2760 @@
+Windows PowerShell
+Copyright (C) 2009 Microsoft Corporation. All rights reserved.
+
+PS C:\Users\Administrator> ll
+The term 'll' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling
+ of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:3
++ ll <<<<
+    + CategoryInfo          : ObjectNotFound: (ll:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Administrator> ls
+
+
+    Directory: C:\Users\Administrator
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+d-r--        2016-04-16     15:43            Contacts
+d-r--        2016-04-16     15:43            Desktop
+d-r--        2016-04-16     15:43            Documents
+d-r--        2016-04-16     15:43            Downloads
+d-r--        2016-04-16     15:43            Favorites
+d-r--        2016-04-16     15:43            Links
+d-r--        2016-04-16     15:43            Music
+d-r--        2016-04-16     15:43            Pictures
+d-r--        2016-04-16     15:43            Saved Games
+d-r--        2016-04-16     15:43            Searches
+d-r--        2016-04-16     15:43            Videos
+
+
+PS C:\Users\Administrator> mkdir abd-lab03
+
+
+    Directory: C:\Users\Administrator
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+d----        2016-04-17     14:12            abd-lab03
+
+
+PS C:\Users\Administrator> cd .\abd-lab03
+PS C:\Users\Administrator\abd-lab03> atom
+The term 'atom' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelli
+ng of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:5
++ atom <<<<
+    + CategoryInfo          : ObjectNotFound: (atom:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Administrator\abd-lab03> cd ..
+PS C:\Users\Administrator> rmdir .\abd-lab03
+PS C:\Users\Administrator>
+PS C:\Users\Administrator> cd .\Documents
+PS C:\Users\Administrator\Documents> mkdir abd-lab03
+
+
+    Directory: C:\Users\Administrator\Documents
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+d----        2016-04-17     14:33            abd-lab03
+
+
+PS C:\Users\Administrator\Documents> cd .\abd-lab03
+PS C:\Users\Administrator\Documents\abd-lab03> diskshadow.exe /s .\vss-01.dsh
+Microsoft DiskShadow version 1.0
+Copyright (C) 2007 Microsoft Corporation
+On computer:  WIN-GJE551ACT59,  2016-04-17 15:00:56
+
+-> # Diskshadow syntax: https://technet.microsoft.com/en-us/library/cc772172.aspx
+-> # VSS: https://technet.microsoft.com/en-us/library/ee923636%28v=ws.10%29.aspx
+->
+-> # persistent - Specifies that the shadow copy persists across program exit, reset, or restart.
+-> # nowriters - Specifies that all writers are excluded.
+-> set context persistent nowriters
+->
+-> # Sets the name and location of the shadow creation metadata file
+-> set metadata c:\diskshadowdata\vss-01-metadata.cab
+->
+-> set verbose on
+->
+-> # Starts a full backup session.
+-> begin backup
+->
+-> # Adds volumes to the set of volumes that are to be shadow copied, or adds aliases to the alias environment.
+-> add volume c: alias SystemVolumeShadow
+-> add volume e: alias Disk1GAShadow
+->
+-> # Starts the shadow copy creation process, using the current context and option settings.
+-> create
+
+Alias SystemVolumeShadow for shadow ID {9cc68f86-f367-47b9-9f51-50ee113442c1} set as environment variable.
+Alias Disk1GAShadow for shadow ID {e8254c9a-5517-4d95-8aef-468a5f74b274} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3} set as environment variable.
+Inserted file Manifest.xml into .cab file vss-01-metadata.cab
+Inserted file Dis41C1.tmp into .cab file vss-01-metadata.cab
+
+Querying all shadow copies with the shadow copy set ID {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               %Disk1GAShadow%
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               %SystemVolumeShadow%
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 2
+->
+-> # Exposes a persistent shadow copy as a drive letter, share, or mount point.
+-> expose %SystemVolumeShadow% p:
+-> %SystemVolumeShadow% = {9cc68f86-f367-47b9-9f51-50ee113442c1}
+The shadow copy was successfully exposed as p:\.
+-> expose %Disk1GAShadow% q:
+-> %Disk1GAShadow% = {e8254c9a-5517-4d95-8aef-468a5f74b274}
+The shadow copy was successfully exposed as q:\.
+->
+-> # Executes a file on the local computer.
+-> exec c:\diskshadowdata\backupscript.cmd
+
+C:\Users\Administrator\Documents\abd-lab03>xcopy {e8254c9a-5517-4d95-8aef-468a5f74b274}  h:\ /e
+File not found - {e8254c9a-5517-4d95-8aef-468a5f74b274}
+0 File(s) copied
+The command script returned failure exit code 4.
+The command script failed.
+PS C:\Users\Administrator\Documents\abd-lab03> diskshadow
+Microsoft DiskShadow version 1.0
+Copyright (C) 2007 Microsoft Corporation
+On computer:  WIN-GJE551ACT59,  2016-04-17 15:03:32
+
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: q:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: p:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 2
+
+DISKSHADOW> exit
+PS C:\Users\Administrator\Documents\abd-lab03> diskshadow.exe /s .\vss-01.dsh
+Microsoft DiskShadow version 1.0
+Copyright (C) 2007 Microsoft Corporation
+On computer:  WIN-GJE551ACT59,  2016-04-17 15:04:06
+
+-> # Diskshadow syntax: https://technet.microsoft.com/en-us/library/cc772172.aspx
+-> # VSS: https://technet.microsoft.com/en-us/library/ee923636%28v=ws.10%29.aspx
+->
+-> # persistent - Specifies that the shadow copy persists across program exit, reset, or restart.
+-> # nowriters - Specifies that all writers are excluded.
+-> set context persistent nowriters
+->
+-> # Sets the name and location of the shadow creation metadata file
+-> set metadata c:\diskshadowdata\vss-01-metadata.cab
+The existing file will be overwritten.
+->
+-> set verbose on
+->
+-> # Starts a full backup session.
+-> begin backup
+->
+-> # Adds volumes to the set of volumes that are to be shadow copied, or adds aliases to the alias environment.
+-> add volume c: alias SystemVolumeShadow
+-> add volume e: alias Disk1GAShadow
+->
+-> # Starts the shadow copy creation process, using the current context and option settings.
+-> create
+
+Alias SystemVolumeShadow for shadow ID {0c860584-86d3-47e2-8d58-ac0f4a7210fe} set as environment variable.
+Alias Disk1GAShadow for shadow ID {6562ae31-81de-4de6-9272-ff02acee62d5} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {3a9e4272-d09b-4af0-bcad-62dd168d5a4e} set as environment variable.
+Inserted file Manifest.xml into .cab file vss-01-metadata.cab
+Inserted file Dis25F7.tmp into .cab file vss-01-metadata.cab
+
+Querying all shadow copies with the shadow copy set ID {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               %Disk1GAShadow%
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               %SystemVolumeShadow%
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 2
+->
+-> # Exposes a persistent shadow copy as a drive letter, share, or mount point.
+-> expose %SystemVolumeShadow% p:
+-> %SystemVolumeShadow% = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}
+The  drive letter is already in use.
+PS C:\Users\Administrator\Documents\abd-lab03> diskshadow
+Microsoft DiskShadow version 1.0
+Copyright (C) 2007 Microsoft Corporation
+On computer:  WIN-GJE551ACT59,  2016-04-17 15:04:43
+
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: q:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: p:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 4
+
+DISKSHADOW> vssadmin list shadowstorage
+
+The following is a list of DiskShadow commands. For more information about a command, type the command name.
+All inputs in the form of <inputText> must be replaced with parameters or environment variable aliases.
+
+LIST WRITERS        - List all writers on the computer.
+LIST SHADOWS        - List all volume shadow copies on the computer.
+LIST PROVIDERS      - List all VSS providers on the computer.
+
+SET                 - List all current option settings and all DiskShadow aliases that are in the environment variable s
+ettings.
+SET CONTEXT         - Set the shadow copy context.
+SET OPTION          - Set options regarding the shadow copy and autorecovery.
+SET VERBOSE         - Change verbose output mode for DiskShadow.
+SET METADATA        - Specify the name of a .cab file to store metadata for transportable shadow copies.
+
+SIMULATE RESTORE    - Simulate a restore operation.
+
+LOAD METADATA       - Load a Backup Components Document before importing a transportable shadow copy or performing a res
+tore operation.
+
+IMPORT              - Import shadow copies based on the metadata specified in a previous LOAD command.
+
+WRITER VERIFY       - Specify that the backup or restore operation must fail if the writer or component is not included.
+
+WRITER EXCLUDE      - Excludes a writer or component from backup or restore.
+
+ADD                 - List currently added aliases and volumes.
+ADD ALIAS           - Add an alias.
+ADD VOLUME          - Add a volume to the shadow copy creation set.
+ADD SHADOW          - Add a shadow copy to the recovery set.
+
+CREATE              - Create a volume shadow copy set.
+
+EXEC                - Execute the specified shell command script.
+
+BEGIN BACKUP        - Begin a full backup.
+BEGIN RESTORE       - Begin a restore.
+
+END BACKUP          - Ends a full backup.
+END RESTORE         - Ends a restore.
+
+EXPOSE              - Expose a shadow copy.
+
+UNEXPOSE            - Unexpose a shadow copy.
+
+REVERT              - Revert a shadow copy.
+
+RESYNC              - Hardware shadow copy revert.
+
+BREAK               - Break a shadow copy.
+
+MASK                - Hide an imported hardware shadow copy from the system.
+
+DELETE SHADOWS      - Delete shadow copies.
+
+RESET               - Reset DiskShadow to its original state.
+
+EXIT                - Exits DiskShadow.
+
+
+DISKSHADOW> exit
+PS C:\Users\Administrator\Documents\abd-lab03> vssadmin list shadowstorage
+vssadmin 1.1 - Volume Shadow Copy Service administrative command-line tool
+(C) Copyright 2001-2005 Microsoft Corp.
+
+Shadow Copy Storage association
+   For volume: (E:)\\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\
+   Shadow Copy Storage volume: (H:)\\?\Volume{54922f09-0417-11e6-9133-000c29b3a9f0}\
+   Used Shadow Copy Storage space: 320 KB (0%)
+   Allocated Shadow Copy Storage space: 992.172 MB (4%)
+   Maximum Shadow Copy Storage space: UNBOUNDED (100%)
+
+Shadow Copy Storage association
+   For volume: (C:)\\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\
+   Shadow Copy Storage volume: (C:)\\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\
+   Used Shadow Copy Storage space: 9.672 MB (0%)
+   Allocated Shadow Copy Storage space: 1.475 GB (3%)
+   Maximum Shadow Copy Storage space: UNBOUNDED (100%)
+
+PS C:\Users\Administrator\Documents\abd-lab03> dishshadow
+The term 'dishshadow' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:11
++ dishshadow <<<<
+    + CategoryInfo          : ObjectNotFound: (dishshadow:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Administrator\Documents\abd-lab03> diskshadow
+Microsoft DiskShadow version 1.0
+Copyright (C) 2007 Microsoft Corporation
+On computer:  WIN-GJE551ACT59,  2016-04-17 15:18:15
+
+
+DISKSHADOW> list shadows
+
+LIST SHADOWS { ALL | SET <setID> | ID <shadowID> }
+
+        List shadow copies.
+
+        ALL                     All shadow copies (persistent and non-persistent).
+        SET <setID>             List shadow copies that belong to the shadow copy set specified by the setId parameter.
+        ID  <shadowID>          List any shadow copy that matches the shadow copy ID specified by the shadowId parameter
+.
+
+        Example: LIST SHADOWS ALL
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: q:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: p:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 4
+
+DISKSHADOW> /h
+
+The following is a list of DiskShadow commands. For more information about a command, type the command name.
+All inputs in the form of <inputText> must be replaced with parameters or environment variable aliases.
+
+LIST WRITERS        - List all writers on the computer.
+LIST SHADOWS        - List all volume shadow copies on the computer.
+LIST PROVIDERS      - List all VSS providers on the computer.
+
+SET                 - List all current option settings and all DiskShadow aliases that are in the environment variable s
+ettings.
+SET CONTEXT         - Set the shadow copy context.
+SET OPTION          - Set options regarding the shadow copy and autorecovery.
+SET VERBOSE         - Change verbose output mode for DiskShadow.
+SET METADATA        - Specify the name of a .cab file to store metadata for transportable shadow copies.
+
+SIMULATE RESTORE    - Simulate a restore operation.
+
+LOAD METADATA       - Load a Backup Components Document before importing a transportable shadow copy or performing a res
+tore operation.
+
+IMPORT              - Import shadow copies based on the metadata specified in a previous LOAD command.
+
+WRITER VERIFY       - Specify that the backup or restore operation must fail if the writer or component is not included.
+
+WRITER EXCLUDE      - Excludes a writer or component from backup or restore.
+
+ADD                 - List currently added aliases and volumes.
+ADD ALIAS           - Add an alias.
+ADD VOLUME          - Add a volume to the shadow copy creation set.
+ADD SHADOW          - Add a shadow copy to the recovery set.
+
+CREATE              - Create a volume shadow copy set.
+
+EXEC                - Execute the specified shell command script.
+
+BEGIN BACKUP        - Begin a full backup.
+BEGIN RESTORE       - Begin a restore.
+
+END BACKUP          - Ends a full backup.
+END RESTORE         - Ends a restore.
+
+EXPOSE              - Expose a shadow copy.
+
+UNEXPOSE            - Unexpose a shadow copy.
+
+REVERT              - Revert a shadow copy.
+
+RESYNC              - Hardware shadow copy revert.
+
+BREAK               - Break a shadow copy.
+
+MASK                - Hide an imported hardware shadow copy from the system.
+
+DELETE SHADOWS      - Delete shadow copies.
+
+RESET               - Reset DiskShadow to its original state.
+
+EXIT                - Exits DiskShadow.
+
+
+DISKSHADOW> list writers
+
+Listing the writer metadata ...
+
+        * WRITER "Task Scheduler Writer"
+                - Writer ID   = {d61d61c8-d73a-4eee-8cdd-f6f9786b7124}
+                - Writer instance ID = {1bddd48e-5052-49db-9b07-b96f96727e6b}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE
+                - Requires reboot after restore = FALSE
+                - Excluded files:
+                + Component "Task Scheduler Writer:\TasksStore"
+                        - Name: TasksStore
+                        - Logical path:
+                        - Full path: \TasksStore
+                        - Caption: Tasks Store
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\Windows\System32\Tasks
+                                - C:\Windows\Tasks
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+        * WRITER "VSS Metadata Store Writer"
+                - Writer ID   = {75dfb225-e2e4-4d39-9ac9-ffaff65ddf06}
+                - Writer instance ID = {088e7a7d-09a8-4cc6-a609-ad90e75ddc93}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE
+                - Requires reboot after restore = FALSE
+                - Excluded files:
+                + Component "VSS Metadata Store Writer:\WriterMetadataStore"
+                        - Name: WriterMetadataStore
+                        - Logical path:
+                        - Full path: \WriterMetadataStore
+                        - Caption: VSS Express Writer Metadata Store
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\Windows\Vss\Writers
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+        * WRITER "Performance Counters Writer"
+                - Writer ID   = {0bada1de-01a9-4625-8278-69e735f39dd2}
+                - Writer instance ID = {f0086dda-9efc-47c5-8eb6-a944c3d09381}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE
+                - Requires reboot after restore = FALSE
+                - Excluded files:
+                + Component "Performance Counters Writer:\PerformanceCounters"
+                        - Name: PerformanceCounters
+                        - Logical path:
+                        - Full path: \PerformanceCounters
+                        - Caption: Performance Counters
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\Windows\System32
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+        * WRITER "System Writer"
+                - Writer ID   = {e8132975-6f93-4464-a53e-1050253ae220}
+                - Writer instance ID = {223b337b-1784-4a95-a271-6413d9f8cba0}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE
+                - Requires reboot after restore = TRUE
+                - Excluded files:
+                + Component "System Writer:\System Files"
+                        - Name: System Files
+                        - Logical path:
+                        - Full path: \System Files
+                        - Caption: System Files
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\ProgramData\Microsoft\Crypto\RSA\MachineKeys
+                                - C:\Windows\ServiceProfiles\NetworkService\AppData\Roaming\Microsoft\SoftwareProtection
+Platform
+                                - C:\Windows\System32\Microsoft\Protect
+                                - C:\Windows\assembly
+                                - C:\Windows\servicing\packages
+                                - C:\Windows\system32\CatRoot2\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}
+                                - C:\Windows\system32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}
+                                - C:\Windows\system32\DriverStore\FileRepository
+                                - C:\Windows\winsxs
+                                - c:\program files (x86)\common files\microsoft shared\dao
+                                - c:\program files (x86)\common files\microsoft shared\ink
+                                - c:\program files (x86)\common files\microsoft shared\msinfo
+                                - c:\program files (x86)\common files\microsoft shared\msinfo\en-us
+                                - c:\program files (x86)\common files\microsoft shared\vgx
+                                - c:\program files (x86)\common files\services
+                                - c:\program files (x86)\common files\speechengines\microsoft\tts20
+                                - c:\program files (x86)\common files\speechengines\microsoft\tts20\en-us
+                                - c:\program files (x86)\common files\speechengines\microsoft\tts20\en-us\enu-dsk
+                                - c:\program files (x86)\common files\system
+                                - c:\program files (x86)\common files\system\ado
+                                - c:\program files (x86)\common files\system\ado\en-us
+                                - c:\program files (x86)\common files\system\en-us
+                                - c:\program files (x86)\common files\system\msadc
+                                - c:\program files (x86)\common files\system\msadc\en-us
+                                - c:\program files (x86)\common files\system\ole db
+                                - c:\program files (x86)\common files\system\ole db\en-us
+                                - c:\program files (x86)\internet explorer
+                                - c:\program files (x86)\internet explorer\en-us
+                                - c:\program files (x86)\mozilla maintenance service
+                                - c:\program files (x86)\windows mail
+                                - c:\program files (x86)\windows nt\accessories
+                                - c:\program files (x86)\windows nt\accessories\en-us
+                                - c:\program files (x86)\windows nt\tabletextservice
+                                - c:\program files (x86)\windows nt\tabletextservice\en-us
+                                - c:\program files\common files\microsoft shared\ink
+                                - c:\program files\common files\microsoft shared\ink\ar-sa
+                                - c:\program files\common files\microsoft shared\ink\bg-bg
+                                - c:\program files\common files\microsoft shared\ink\cs-cz
+                                - c:\program files\common files\microsoft shared\ink\da-dk
+                                - c:\program files\common files\microsoft shared\ink\de-de
+                                - c:\program files\common files\microsoft shared\ink\el-gr
+                                - c:\program files\common files\microsoft shared\ink\en-us
+                                - c:\program files\common files\microsoft shared\ink\es-es
+                                - c:\program files\common files\microsoft shared\ink\et-ee
+                                - c:\program files\common files\microsoft shared\ink\fi-fi
+                                - c:\program files\common files\microsoft shared\ink\fr-fr
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\auxpad
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\keypad
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\main
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\numbers
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\oskmenu
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\osknumpad
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\oskpred
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\symbols
+                                - c:\program files\common files\microsoft shared\ink\fsdefinitions\web
+                                - c:\program files\common files\microsoft shared\ink\he-il
+                                - c:\program files\common files\microsoft shared\ink\hr-hr
+                                - c:\program files\common files\microsoft shared\ink\hu-hu
+                                - c:\program files\common files\microsoft shared\ink\it-it
+                                - c:\program files\common files\microsoft shared\ink\ja-jp
+                                - c:\program files\common files\microsoft shared\ink\ko-kr
+                                - c:\program files\common files\microsoft shared\ink\lt-lt
+                                - c:\program files\common files\microsoft shared\ink\lv-lv
+                                - c:\program files\common files\microsoft shared\ink\nb-no
+                                - c:\program files\common files\microsoft shared\ink\nl-nl
+                                - c:\program files\common files\microsoft shared\ink\pl-pl
+                                - c:\program files\common files\microsoft shared\ink\pt-br
+                                - c:\program files\common files\microsoft shared\ink\pt-pt
+                                - c:\program files\common files\microsoft shared\ink\ro-ro
+                                - c:\program files\common files\microsoft shared\ink\ru-ru
+                                - c:\program files\common files\microsoft shared\ink\sk-sk
+                                - c:\program files\common files\microsoft shared\ink\sl-si
+                                - c:\program files\common files\microsoft shared\ink\sr-latn-cs
+                                - c:\program files\common files\microsoft shared\ink\sv-se
+                                - c:\program files\common files\microsoft shared\ink\th-th
+                                - c:\program files\common files\microsoft shared\ink\tr-tr
+                                - c:\program files\common files\microsoft shared\ink\uk-ua
+                                - c:\program files\common files\microsoft shared\ink\zh-cn
+                                - c:\program files\common files\microsoft shared\ink\zh-tw
+                                - c:\program files\common files\microsoft shared\msinfo
+                                - c:\program files\common files\microsoft shared\msinfo\en-us
+                                - c:\program files\common files\microsoft shared\vgx
+                                - c:\program files\common files\services
+                                - c:\program files\common files\speechengines\microsoft\tts20
+                                - c:\program files\common files\speechengines\microsoft\tts20\en-us
+                                - c:\program files\common files\system
+                                - c:\program files\common files\system\ado
+                                - c:\program files\common files\system\ado\en-us
+                                - c:\program files\common files\system\en-us
+                                - c:\program files\common files\system\msadc
+                                - c:\program files\common files\system\msadc\en-us
+                                - c:\program files\common files\system\ole db
+                                - c:\program files\common files\system\ole db\en-us
+                                - c:\program files\common files\vmware\drivers\memctl
+                                - c:\program files\internet explorer
+                                - c:\program files\internet explorer\en-us
+                                - c:\program files\vmware\vmware tools
+                                - c:\program files\windows mail
+                                - c:\program files\windows nt\accessories
+                                - c:\program files\windows nt\accessories\en-us
+                                - c:\program files\windows nt\tabletextservice
+                                - c:\program files\windows nt\tabletextservice\en-us
+                                - c:\programdata\microsoft\device stage\device\{113527a4-45d4-4b6f-b567-97838f1b04b0}
+                                - c:\programdata\microsoft\device stage\device\{8702d817-5aad-4674-9ef3-4d3decd87120}
+                                - c:\programdata\microsoft\device stage\task\{07deb856-fc6e-4fb9-8add-d8f2cf8722c9}
+                                - c:\programdata\microsoft\device stage\task\{07deb856-fc6e-4fb9-8add-d8f2cf8722c9}\en-u
+s
+                                - c:\programdata\microsoft\device stage\task\{e35be42d-f742-4d96-a50a-1775fb1a7a42}
+                                - c:\programdata\microsoft\device stage\task\{e35be42d-f742-4d96-a50a-1775fb1a7a42}\en-u
+s
+                                - c:\programdata\microsoft\servermanager\events
+                                - c:\programdata\microsoft\windows\devicemetadatastore\en-us
+                                - c:\windows
+                                - c:\windows\apppatch
+                                - c:\windows\apppatch\apppatch64
+                                - c:\windows\apppatch\en-us
+                                - c:\windows\boot\efi
+                                - c:\windows\boot\efi\cs-cz
+                                - c:\windows\boot\efi\da-dk
+                                - c:\windows\boot\efi\de-de
+                                - c:\windows\boot\efi\el-gr
+                                - c:\windows\boot\efi\en-us
+                                - c:\windows\boot\efi\es-es
+                                - c:\windows\boot\efi\fi-fi
+                                - c:\windows\boot\efi\fr-fr
+                                - c:\windows\boot\efi\hu-hu
+                                - c:\windows\boot\efi\it-it
+                                - c:\windows\boot\efi\ja-jp
+                                - c:\windows\boot\efi\ko-kr
+                                - c:\windows\boot\efi\nb-no
+                                - c:\windows\boot\efi\nl-nl
+                                - c:\windows\boot\efi\pl-pl
+                                - c:\windows\boot\efi\pt-br
+                                - c:\windows\boot\efi\pt-pt
+                                - c:\windows\boot\efi\ru-ru
+                                - c:\windows\boot\efi\sv-se
+                                - c:\windows\boot\efi\tr-tr
+                                - c:\windows\boot\efi\zh-cn
+                                - c:\windows\boot\efi\zh-hk
+                                - c:\windows\boot\efi\zh-tw
+                                - c:\windows\boot\fonts
+                                - c:\windows\boot\pcat
+                                - c:\windows\boot\pcat\cs-cz
+                                - c:\windows\boot\pcat\da-dk
+                                - c:\windows\boot\pcat\de-de
+                                - c:\windows\boot\pcat\el-gr
+                                - c:\windows\boot\pcat\en-us
+                                - c:\windows\boot\pcat\es-es
+                                - c:\windows\boot\pcat\fi-fi
+                                - c:\windows\boot\pcat\fr-fr
+                                - c:\windows\boot\pcat\hu-hu
+                                - c:\windows\boot\pcat\it-it
+                                - c:\windows\boot\pcat\ja-jp
+                                - c:\windows\boot\pcat\ko-kr
+                                - c:\windows\boot\pcat\nb-no
+                                - c:\windows\boot\pcat\nl-nl
+                                - c:\windows\boot\pcat\pl-pl
+                                - c:\windows\boot\pcat\pt-br
+                                - c:\windows\boot\pcat\pt-pt
+                                - c:\windows\boot\pcat\ru-ru
+                                - c:\windows\boot\pcat\sv-se
+                                - c:\windows\boot\pcat\tr-tr
+                                - c:\windows\boot\pcat\zh-cn
+                                - c:\windows\boot\pcat\zh-hk
+                                - c:\windows\boot\pcat\zh-tw
+                                - c:\windows\branding\basebrd
+                                - c:\windows\branding\basebrd\en-us
+                                - c:\windows\branding\shellbrd
+                                - c:\windows\cursors
+                                - c:\windows\diagnostics\index
+                                - c:\windows\diagnostics\system\networking
+                                - c:\windows\diagnostics\system\networking\en-us
+                                - c:\windows\diagnostics\system\pcw
+                                - c:\windows\diagnostics\system\pcw\en-us
+                                - c:\windows\en-us
+                                - c:\windows\fonts
+                                - c:\windows\globalization\els\transliteration
+                                - c:\windows\globalization\sorting
+                                - c:\windows\help\help\en-us
+                                - c:\windows\help\mui\0409
+                                - c:\windows\help\windows\en-us
+                                - c:\windows\ime\imejp10\dicts
+                                - c:\windows\ime\imejp10\help
+                                - c:\windows\ime\imekr8\dicts
+                                - c:\windows\ime\imekr8\help
+                                - c:\windows\ime\imesc5\dicts
+                                - c:\windows\ime\imesc5\help
+                                - c:\windows\ime\imetc10\dicts
+                                - c:\windows\ime\imetc10\help
+                                - c:\windows\inf
+                                - c:\windows\inf\.net clr data
+                                - c:\windows\inf\.net clr data\0000
+                                - c:\windows\inf\.net clr data\0409
+                                - c:\windows\inf\.net clr networking
+                                - c:\windows\inf\.net clr networking\0000
+                                - c:\windows\inf\.net clr networking\0409
+                                - c:\windows\inf\.net data provider for oracle
+                                - c:\windows\inf\.net data provider for oracle\0000
+                                - c:\windows\inf\.net data provider for oracle\0409
+                                - c:\windows\inf\.net data provider for sqlserver
+                                - c:\windows\inf\.net data provider for sqlserver\0000
+                                - c:\windows\inf\.net data provider for sqlserver\0409
+                                - c:\windows\inf\.netframework
+                                - c:\windows\inf\.netframework\0000
+                                - c:\windows\inf\.netframework\0409
+                                - c:\windows\inf\bits
+                                - c:\windows\inf\bits\0000
+                                - c:\windows\inf\bits\0409
+                                - c:\windows\inf\en-us
+                                - c:\windows\inf\esent
+                                - c:\windows\inf\esent\0000
+                                - c:\windows\inf\esent\0409
+                                - c:\windows\inf\msdtc
+                                - c:\windows\inf\msdtc\0000
+                                - c:\windows\inf\msdtc\0409
+                                - c:\windows\inf\remoteaccess
+                                - c:\windows\inf\remoteaccess\0000
+                                - c:\windows\inf\remoteaccess\0409
+                                - c:\windows\inf\startergpos\{0874086b-4ad8-4b4d-9321-dcba3aa69c8c}
+                                - c:\windows\inf\startergpos\{0874086b-4ad8-4b4d-9321-dcba3aa69c8c}\en-us
+                                - c:\windows\inf\startergpos\{0874086b-4ad8-4b4d-9321-dcba3aa69c8c}\user
+                                - c:\windows\inf\startergpos\{216eb3f9-cca5-4d88-b667-8753307deb5c}
+                                - c:\windows\inf\startergpos\{216eb3f9-cca5-4d88-b667-8753307deb5c}\en-us
+                                - c:\windows\inf\startergpos\{216eb3f9-cca5-4d88-b667-8753307deb5c}\machine
+                                - c:\windows\inf\startergpos\{216eb3f9-cca5-4d88-b667-8753307deb5c}\machine\en-us
+                                - c:\windows\inf\startergpos\{2e38ccc9-9766-4a17-a43e-863e7212f31c}
+                                - c:\windows\inf\startergpos\{2e38ccc9-9766-4a17-a43e-863e7212f31c}\en-us
+                                - c:\windows\inf\startergpos\{2e38ccc9-9766-4a17-a43e-863e7212f31c}\user
+                                - c:\windows\inf\startergpos\{37563dde-e710-405a-b8bf-76f27402e554}
+                                - c:\windows\inf\startergpos\{37563dde-e710-405a-b8bf-76f27402e554}\en-us
+                                - c:\windows\inf\startergpos\{37563dde-e710-405a-b8bf-76f27402e554}\machine
+                                - c:\windows\inf\startergpos\{37563dde-e710-405a-b8bf-76f27402e554}\machine\en-us
+                                - c:\windows\inf\startergpos\{7665a933-1049-43dd-b692-416c7f6a55d6}
+                                - c:\windows\inf\startergpos\{7665a933-1049-43dd-b692-416c7f6a55d6}\en-us
+                                - c:\windows\inf\startergpos\{7665a933-1049-43dd-b692-416c7f6a55d6}\machine
+                                - c:\windows\inf\startergpos\{7665a933-1049-43dd-b692-416c7f6a55d6}\machine\en-us
+                                - c:\windows\inf\startergpos\{8780588e-ef91-442b-bd5f-2d50de7abf76}
+                                - c:\windows\inf\startergpos\{8780588e-ef91-442b-bd5f-2d50de7abf76}\en-us
+                                - c:\windows\inf\startergpos\{8780588e-ef91-442b-bd5f-2d50de7abf76}\user
+                                - c:\windows\inf\startergpos\{8780588e-ef91-442b-bd5f-2d50de7abf76}\user\en-us
+                                - c:\windows\inf\startergpos\{9c03f88d-8608-44b7-a3e7-7316d1cac152}
+                                - c:\windows\inf\startergpos\{9c03f88d-8608-44b7-a3e7-7316d1cac152}\en-us
+                                - c:\windows\inf\startergpos\{9c03f88d-8608-44b7-a3e7-7316d1cac152}\user
+                                - c:\windows\inf\startergpos\{b52976f5-3ee4-4c77-80b9-11911f065ef7}
+                                - c:\windows\inf\startergpos\{b52976f5-3ee4-4c77-80b9-11911f065ef7}\en-us
+                                - c:\windows\inf\startergpos\{b52976f5-3ee4-4c77-80b9-11911f065ef7}\machine
+                                - c:\windows\inf\tapisrv
+                                - c:\windows\inf\tapisrv\0000
+                                - c:\windows\inf\tapisrv\0409
+                                - c:\windows\inf\termservice
+                                - c:\windows\inf\termservice\0000
+                                - c:\windows\inf\termservice\0409
+                                - c:\windows\inf\usbhub
+                                - c:\windows\inf\usbhub\0000
+                                - c:\windows\inf\usbhub\0409
+                                - c:\windows\l2schemas
+                                - c:\windows\media
+                                - c:\windows\microsoft.net
+                                - c:\windows\microsoft.net\assembly\gac_32\custommarshalers\v4.0_4.0.0.0__b03f5f7f11d50a
+3a
+                                - c:\windows\microsoft.net\assembly\gac_32\isymwrapper\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_32\microsoft.transactions.bridge.dtc\v4.0_4.0.0.
+0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_32\microsoft.visualbasic.activities.compiler\v4.
+0_10.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_32\presentationcore\v4.0_4.0.0.0__31bf3856ad364e
+35
+                                - c:\windows\microsoft.net\assembly\gac_32\system.data.oracleclient\v4.0_4.0.0.0__b77a5c
+561934e089
+                                - c:\windows\microsoft.net\assembly\gac_32\system.data\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_32\system.enterpriseservices\v4.0_4.0.0.0__b03f5
+f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_32\system.printing\v4.0_4.0.0.0__31bf3856ad364e3
+5
+                                - c:\windows\microsoft.net\assembly\gac_32\system.transactions\v4.0_4.0.0.0__b77a5c56193
+4e089
+                                - c:\windows\microsoft.net\assembly\gac_32\system.web\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_64\custommarshalers\v4.0_4.0.0.0__b03f5f7f11d50a
+3a
+                                - c:\windows\microsoft.net\assembly\gac_64\isymwrapper\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_64\microsoft.transactions.bridge.dtc\v4.0_4.0.0.
+0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_64\microsoft.visualbasic.activities.compiler\v4.
+0_10.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_64\mscorlib\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_64\presentationcore\v4.0_4.0.0.0__31bf3856ad364e
+35
+                                - c:\windows\microsoft.net\assembly\gac_64\system.data.oracleclient\v4.0_4.0.0.0__b77a5c
+561934e089
+                                - c:\windows\microsoft.net\assembly\gac_64\system.data\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_64\system.enterpriseservices\v4.0_4.0.0.0__b03f5
+f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_64\system.printing\v4.0_4.0.0.0__31bf3856ad364e3
+5
+                                - c:\windows\microsoft.net\assembly\gac_64\system.transactions\v4.0_4.0.0.0__b77a5c56193
+4e089
+                                - c:\windows\microsoft.net\assembly\gac_64\system.web\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\accessibility\v4.0_4.0.0.0__b03f5f7f11d50a3
+a
+                                - c:\windows\microsoft.net\assembly\gac_msil\aspnetmmcext\v4.0_4.0.0.0__b03f5f7f11d50a3a
+
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.activities.build\v4.0_4.0.0.0__31
+bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.build.conversion.v4.0\v4.0_4.0.0.
+0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.build.engine\v4.0_4.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.build.framework\v4.0_4.0.0.0__b03
+f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.build.tasks.v4.0\v4.0_4.0.0.0__b0
+3f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.build.utilities.v4.0\v4.0_4.0.0.0
+__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.build\v4.0_4.0.0.0__b03f5f7f11d50
+a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.csharp\v4.0_4.0.0.0__b03f5f7f11d5
+0a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.data.entity.build.tasks\v4.0_4.0.
+0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.internal.tasks.dataflow\v4.0_4.0.
+0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.jscript\v4.0_10.0.0.0__b03f5f7f11
+d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.transactions.bridge\v4.0_4.0.0.0_
+_b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.visualbasic.compatibility.data\v4
+.0_10.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.visualbasic.compatibility\v4.0_10
+.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.visualbasic\v4.0_10.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.visualc.stlclr\v4.0_2.0.0.0__b03f
+5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.visualc\v4.0_10.0.0.0__b03f5f7f11
+d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.windows.applicationserver.applica
+tions\v4.0_4.0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\microsoft.workflow.compiler\v4.0_4.0.0.0__3
+1bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationbuildtasks\v4.0_4.0.0.0__31bf38
+56ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework-systemcore\v4.0_4.0.0
+.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework-systemdata\v4.0_4.0.0
+.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework-systemdrawing\v4.0_4.
+0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework-systemxml\v4.0_4.0.0.
+0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework-systemxmllinq\v4.0_4.
+0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework.aero\v4.0_4.0.0.0__31
+bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework.aerolite\v4.0_4.0.0.0
+__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework.classic\v4.0_4.0.0.0_
+_31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework.luna\v4.0_4.0.0.0__31
+bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework.royale\v4.0_4.0.0.0__
+31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationframework\v4.0_4.0.0.0__31bf385
+6ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\presentationui\v4.0_4.0.0.0__31bf3856ad364e
+35
+                                - c:\windows\microsoft.net\assembly\gac_msil\reachframework\v4.0_4.0.0.0__31bf3856ad364e
+35
+                                - c:\windows\microsoft.net\assembly\gac_msil\smdiagnostics\v4.0_4.0.0.0__b77a5c561934e08
+9
+                                - c:\windows\microsoft.net\assembly\gac_msil\sysglobl\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.activities.core.presentation\v4.0_4.
+0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.activities.durableinstancing\v4.0_4.
+0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.activities.presentation\v4.0_4.0.0.0
+__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.activities\v4.0_4.0.0.0__31bf3856ad3
+64e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.addin.contract\v4.0_4.0.0.0__b03f5f7
+f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.addin\v4.0_4.0.0.0__b77a5c561934e089
+
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.collections.concurrent\v4.0_4.0.0.0_
+_b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.collections\v4.0_4.0.0.0__b03f5f7f11
+d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.componentmodel.annotations\v4.0_4.0.
+0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.componentmodel.composition.registrat
+ion\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.componentmodel.composition\v4.0_4.0.
+0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.componentmodel.dataannotations\v4.0_
+4.0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.componentmodel.eventbasedasync\v4.0_
+4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.componentmodel\v4.0_4.0.0.0__b03f5f7
+f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.configuration.install\v4.0_4.0.0.0__
+b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.configuration\v4.0_4.0.0.0__b03f5f7f
+11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.core\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.datasetextensions\v4.0_4.0.0.0_
+_b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.entity.design\v4.0_4.0.0.0__b77
+a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.entity\v4.0_4.0.0.0__b77a5c5619
+34e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.linq\v4.0_4.0.0.0__b77a5c561934
+e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.services.client\v4.0_4.0.0.0__b
+77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.services.design\v4.0_4.0.0.0__b
+77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.services\v4.0_4.0.0.0__b77a5c56
+1934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.data.sqlxml\v4.0_4.0.0.0__b77a5c5619
+34e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.deployment\v4.0_4.0.0.0__b03f5f7f11d
+50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.design\v4.0_4.0.0.0__b03f5f7f11d50a3
+a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.device\v4.0_4.0.0.0__b77a5c561934e08
+9
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.diagnostics.contracts\v4.0_4.0.0.0__
+b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.diagnostics.debug\v4.0_4.0.0.0__b03f
+5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.diagnostics.tools\v4.0_4.0.0.0__b03f
+5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.diagnostics.tracing\v4.0_4.0.0.0__b0
+3f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.directoryservices.accountmanagement\
+v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.directoryservices.protocols\v4.0_4.0
+.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.directoryservices\v4.0_4.0.0.0__b03f
+5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.drawing.design\v4.0_4.0.0.0__b03f5f7
+f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.drawing\v4.0_4.0.0.0__b03f5f7f11d50a
+3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.dynamic.runtime\v4.0_4.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.dynamic\v4.0_4.0.0.0__b03f5f7f11d50a
+3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.globalization\v4.0_4.0.0.0__b03f5f7f
+11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.identitymodel.selectors\v4.0_4.0.0.0
+__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.identitymodel.services\v4.0_4.0.0.0_
+_b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.identitymodel\v4.0_4.0.0.0__b77a5c56
+1934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.io.compression.filesystem\v4.0_4.0.0
+.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.io.compression\v4.0_4.0.0.0__b77a5c5
+61934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.io.log\v4.0_4.0.0.0__b03f5f7f11d50a3
+a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.io\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.linq.expressions\v4.0_4.0.0.0__b03f5
+f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.linq.parallel\v4.0_4.0.0.0__b03f5f7f
+11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.linq.queryable\v4.0_4.0.0.0__b03f5f7
+f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.linq\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.management.instrumentation\v4.0_4.0.
+0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.management\v4.0_4.0.0.0__b03f5f7f11d
+50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.messaging\v4.0_4.0.0.0__b03f5f7f11d5
+0a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net.http.rtc\v4.0_4.0.0.0__b03f5f7f1
+1d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net.http.webrequest\v4.0_4.0.0.0__b0
+3f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net.http\v4.0_4.0.0.0__b03f5f7f11d50
+a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net.networkinformation\v4.0_4.0.0.0_
+_b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net.primitives\v4.0_4.0.0.0__b03f5f7
+f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net.requests\v4.0_4.0.0.0__b03f5f7f1
+1d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.net\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.numerics\v4.0_4.0.0.0__b77a5c561934e
+089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.objectmodel\v4.0_4.0.0.0__b03f5f7f11
+d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection.context\v4.0_4.0.0.0__b77
+a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection.emit.ilgeneration\v4.0_4.
+0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection.emit.lightweight\v4.0_4.0
+.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection.emit\v4.0_4.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection.extensions\v4.0_4.0.0.0__
+b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection.primitives\v4.0_4.0.0.0__
+b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.reflection\v4.0_4.0.0.0__b03f5f7f11d
+50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.resources.resourcemanager\v4.0_4.0.0
+.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.caching\v4.0_4.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.durableinstancing\v4.0_4.0.0
+.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.extensions\v4.0_4.0.0.0__b03
+f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.interopservices.windowsrunti
+me\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.interopservices\v4.0_4.0.0.0
+__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.numerics\v4.0_4.0.0.0__b03f5
+f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.remoting\v4.0_4.0.0.0__b77a5
+c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.serialization.formatters.soa
+p\v4.0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.serialization.json\v4.0_4.0.
+0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.serialization.primitives\v4.
+0_4.0.0.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.serialization.xml\v4.0_4.0.0
+.0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime.serialization\v4.0_4.0.0.0__
+b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.runtime\v4.0_4.0.0.0__b03f5f7f11d50a
+3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.security.principal\v4.0_4.0.0.0__b03
+f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.security\v4.0_4.0.0.0__b03f5f7f11d50
+a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.activation\v4.0_4.0.0.0
+__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.activities\v4.0_4.0.0.0
+__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.channels\v4.0_4.0.0.0__
+31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.discovery\v4.0_4.0.0.0_
+_31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.duplex\v4.0_4.0.0.0__b0
+3f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.http\v4.0_4.0.0.0__b03f
+5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.internals\v4.0_4.0.0.0_
+_31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.nettcp\v4.0_4.0.0.0__b0
+3f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.primitives\v4.0_4.0.0.0
+__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.routing\v4.0_4.0.0.0__3
+1bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.security\v4.0_4.0.0.0__
+b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.servicemoniker40\v4.0_4
+.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.washosting\v4.0_4.0.0.0
+__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel.web\v4.0_4.0.0.0__31bf3
+856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.servicemodel\v4.0_4.0.0.0__b77a5c561
+934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.serviceprocess\v4.0_4.0.0.0__b03f5f7
+f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.speech\v4.0_4.0.0.0__31bf3856ad364e3
+5
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.text.encoding.extensions\v4.0_4.0.0.
+0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.text.encoding\v4.0_4.0.0.0__b03f5f7f
+11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.text.regularexpressions\v4.0_4.0.0.0
+__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.threading.tasks.parallel\v4.0_4.0.0.
+0__b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.threading.tasks\v4.0_4.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.threading.timer\v4.0_4.0.0.0__b03f5f
+7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.threading\v4.0_4.0.0.0__b03f5f7f11d5
+0a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.abstractions\v4.0_4.0.0.0__31bf3
+856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.applicationservices\v4.0_4.0.0.0
+__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.datavisualization.design\v4.0_4.
+0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.datavisualization\v4.0_4.0.0.0__
+31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.dynamicdata.design\v4.0_4.0.0.0_
+_31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.dynamicdata\v4.0_4.0.0.0__31bf38
+56ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.entity.design\v4.0_4.0.0.0__b77a
+5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.entity\v4.0_4.0.0.0__b77a5c56193
+4e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.extensions.design\v4.0_4.0.0.0__
+31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.extensions\v4.0_4.0.0.0__31bf385
+6ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.mobile\v4.0_4.0.0.0__b03f5f7f11d
+50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.regularexpressions\v4.0_4.0.0.0_
+_b03f5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.routing\v4.0_4.0.0.0__31bf3856ad
+364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.web.services\v4.0_4.0.0.0__b03f5f7f1
+1d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows.controls.ribbon\v4.0_4.0.0.0
+__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows.forms.datavisualization.desi
+gn\v4.0_4.0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows.forms.datavisualization\v4.0
+_4.0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows.forms\v4.0_4.0.0.0__b77a5c56
+1934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows.input.manipulations\v4.0_4.0
+.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows.presentation\v4.0_4.0.0.0__b
+77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.windows\v4.0_4.0.0.0__b03f5f7f11d50a
+3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.workflow.activities\v4.0_4.0.0.0__31
+bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.workflow.componentmodel\v4.0_4.0.0.0
+__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.workflow.runtime\v4.0_4.0.0.0__31bf3
+856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.workflowservices\v4.0_4.0.0.0__31bf3
+856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xaml.hosting\v4.0_4.0.0.0__31bf3856a
+d364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xaml\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xml.linq\v4.0_4.0.0.0__b77a5c561934e
+089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xml.readerwriter\v4.0_4.0.0.0__b03f5
+f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xml.serialization\v4.0_4.0.0.0__b77a
+5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xml.xdocument\v4.0_4.0.0.0__b03f5f7f
+11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xml.xmlserializer\v4.0_4.0.0.0__b03f
+5f7f11d50a3a
+                                - c:\windows\microsoft.net\assembly\gac_msil\system.xml\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\system\v4.0_4.0.0.0__b77a5c561934e089
+                                - c:\windows\microsoft.net\assembly\gac_msil\uiautomationclient\v4.0_4.0.0.0__31bf3856ad
+364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\uiautomationclientsideproviders\v4.0_4.0.0.
+0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\uiautomationprovider\v4.0_4.0.0.0__31bf3856
+ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\uiautomationtypes\v4.0_4.0.0.0__31bf3856ad3
+64e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\windowsbase\v4.0_4.0.0.0__31bf3856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\windowsformsintegration\v4.0_4.0.0.0__31bf3
+856ad364e35
+                                - c:\windows\microsoft.net\assembly\gac_msil\xamlbuildtask\v4.0_4.0.0.0__31bf3856ad364e3
+5
+                                - c:\windows\microsoft.net\assembly\gac_msil\xsdbuildtask\v4.0_4.0.0.0__31bf3856ad364e35
+
+                                - c:\windows\microsoft.net\framework
+                                - c:\windows\microsoft.net\framework64
+                                - c:\windows\microsoft.net\framework64\v2.0.50727
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\1033
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\app_code
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\app_data
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\app_globalresourc
+es
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\app_localresource
+s
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\appconfig
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\appconfig\app_loc
+alresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\images
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\providers
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\providers\app_loc
+alresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\app_loca
+lresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\permissi
+ons
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\permissi
+ons\app_localresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\roles
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\roles\ap
+p_localresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\users
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\users\ap
+p_localresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\wizard
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\asp.netwebadminfiles\security\wizard\a
+pp_localresources
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\config
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\config\browsers
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\msbuild
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\mui\0409
+                                - c:\windows\microsoft.net\framework64\v2.0.50727\redistlist
+                                - c:\windows\microsoft.net\framework64\v4.0.30319
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\1033
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\app_code
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\app_data
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\app_globalresourc
+es
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\app_localresource
+s
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\appconfig
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\appconfig\app_loc
+alresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\images
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\providers
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\providers\app_loc
+alresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\app_loca
+lresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\permissi
+ons
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\permissi
+ons\app_localresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\roles
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\roles\ap
+p_localresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\users
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\users\ap
+p_localresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\wizard
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\asp.netwebadminfiles\security\wizard\a
+pp_localresources
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\config
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\config\browsers
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\en-us
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\mof
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\msbuild
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\mui\0409
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1025
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1028
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1029
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1030
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1031
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1032
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1033
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1035
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1036
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1037
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1038
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1040
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1041
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1042
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1043
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1044
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1045
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1046
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1049
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1053
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\1055
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\2052
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\2070
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\3082
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\setupcache\v4.5.51209\graphics
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\sql\en
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\wpf
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\wpf\en-us
+                                - c:\windows\microsoft.net\framework64\v4.0.30319\wpf\fonts
+                                - c:\windows\microsoft.net\framework\v1.0.3705
+                                - c:\windows\microsoft.net\framework\v1.1.4322
+                                - c:\windows\microsoft.net\framework\v2.0.50727
+                                - c:\windows\microsoft.net\framework\v2.0.50727\1033
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\app_globalresources
+
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\app_localresources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\appconfig\app_local
+resources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\providers\app_local
+resources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\security\app_localr
+esources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\security\permission
+s\app_localresources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\security\roles\app_
+localresources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\security\users\app_
+localresources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\asp.netwebadminfiles\security\wizard\app
+_localresources
+                                - c:\windows\microsoft.net\framework\v2.0.50727\config
+                                - c:\windows\microsoft.net\framework\v2.0.50727\config\browsers
+                                - c:\windows\microsoft.net\framework\v2.0.50727\msbuild
+                                - c:\windows\microsoft.net\framework\v2.0.50727\mui\0409
+                                - c:\windows\microsoft.net\framework\v2.0.50727\redistlist
+                                - c:\windows\microsoft.net\framework\v4.0.30319
+                                - c:\windows\microsoft.net\framework\v4.0.30319\1033
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\app_code
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\app_data
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\app_globalresources
+
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\app_localresources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\appconfig
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\appconfig\app_local
+resources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\images
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\providers
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\providers\app_local
+resources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\app_localr
+esources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\permission
+s
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\permission
+s\app_localresources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\roles
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\roles\app_
+localresources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\users
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\users\app_
+localresources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\wizard
+                                - c:\windows\microsoft.net\framework\v4.0.30319\asp.netwebadminfiles\security\wizard\app
+_localresources
+                                - c:\windows\microsoft.net\framework\v4.0.30319\config
+                                - c:\windows\microsoft.net\framework\v4.0.30319\config\browsers
+                                - c:\windows\microsoft.net\framework\v4.0.30319\en-us
+                                - c:\windows\microsoft.net\framework\v4.0.30319\mof
+                                - c:\windows\microsoft.net\framework\v4.0.30319\msbuild
+                                - c:\windows\microsoft.net\framework\v4.0.30319\mui\0409
+                                - c:\windows\microsoft.net\framework\v4.0.30319\sql\en
+                                - c:\windows\microsoft.net\framework\v4.0.30319\wpf
+                                - c:\windows\microsoft.net\framework\v4.0.30319\wpf\en-us
+                                - c:\windows\microsoft.net\framework\v4.0.30319\wpf\fonts
+                                - c:\windows\pla\reports
+                                - c:\windows\pla\reports\en-us
+                                - c:\windows\pla\rules
+                                - c:\windows\pla\rules\en-us
+                                - c:\windows\policydefinitions
+                                - c:\windows\policydefinitions\en-us
+                                - c:\windows\resources\ease of access themes
+                                - c:\windows\schemas\availablenetwork
+                                - c:\windows\schemas\eaphost
+                                - c:\windows\schemas\eapmethods
+                                - c:\windows\schemas\tsworkspace
+                                - c:\windows\security
+                                - c:\windows\security\msscw\kbs
+                                - c:\windows\security\msscw\kbs\mui\en-us
+                                - c:\windows\security\msscw\transformfiles
+                                - c:\windows\security\msscw\transformfiles\mui\en-us
+                                - c:\windows\security\msscw\transformfiles\view
+                                - c:\windows\servicing
+                                - c:\windows\servicing\editions
+                                - c:\windows\servicing\en-us
+                                - c:\windows\servicing\gc64
+                                - c:\windows\servicing\version\6.1.7601.17514
+                                - c:\windows\speech\common
+                                - c:\windows\speech\common\en-us
+                                - c:\windows\sysmsicache\wssee
+                                - c:\windows\system32
+                                - c:\windows\system32\advancedinstallers
+                                - c:\windows\system32\ar-sa
+                                - c:\windows\system32\bg-bg
+                                - c:\windows\system32\boot
+                                - c:\windows\system32\boot\en-us
+                                - c:\windows\system32\codeintegrity
+                                - c:\windows\system32\com
+                                - c:\windows\system32\com\en-us
+                                - c:\windows\system32\cs-cz
+                                - c:\windows\system32\da-dk
+                                - c:\windows\system32\de-de
+                                - c:\windows\system32\dism
+                                - c:\windows\system32\dism\en-us
+                                - c:\windows\system32\drivers
+                                - c:\windows\system32\drivers\en-us
+                                - c:\windows\system32\drivers\umdf
+                                - c:\windows\system32\drivers\umdf\en-us
+                                - c:\windows\system32\driverstore
+                                - c:\windows\system32\driverstore\en-us
+                                - c:\windows\system32\el-gr
+                                - c:\windows\system32\en
+                                - c:\windows\system32\en-us
+                                - c:\windows\system32\en-us\licenses\_default\serverdatacenter
+                                - c:\windows\system32\en-us\licenses\_default\serverdatacenterv
+                                - c:\windows\system32\en-us\licenses\_default\serverembeddedsolution
+                                - c:\windows\system32\en-us\licenses\_default\serverenterprise
+                                - c:\windows\system32\en-us\licenses\_default\serverenterpriseia64
+                                - c:\windows\system32\en-us\licenses\_default\serverenterprisev
+                                - c:\windows\system32\en-us\licenses\_default\serveressentialadditional
+                                - c:\windows\system32\en-us\licenses\_default\serveressentialadditionalsvc
+                                - c:\windows\system32\en-us\licenses\_default\serveressentialmanagement
+                                - c:\windows\system32\en-us\licenses\_default\serveressentialmanagementsvc
+                                - c:\windows\system32\en-us\licenses\_default\serverforsbsolutions
+                                - c:\windows\system32\en-us\licenses\_default\serverforsbsolutionsem
+                                - c:\windows\system32\en-us\licenses\_default\serverfoundation
+                                - c:\windows\system32\en-us\licenses\_default\serverhomepremium
+                                - c:\windows\system32\en-us\licenses\_default\serverhomestandard
+                                - c:\windows\system32\en-us\licenses\_default\serverhpc
+                                - c:\windows\system32\en-us\licenses\_default\serverhyper
+                                - c:\windows\system32\en-us\licenses\_default\servermediumbusinessmanagement
+                                - c:\windows\system32\en-us\licenses\_default\servermediumbusinessmessaging
+                                - c:\windows\system32\en-us\licenses\_default\servermediumbusinesssecurity
+                                - c:\windows\system32\en-us\licenses\_default\serversbspremium
+                                - c:\windows\system32\en-us\licenses\_default\serversbsstandard
+                                - c:\windows\system32\en-us\licenses\_default\serversolution
+                                - c:\windows\system32\en-us\licenses\_default\serversolutionem
+                                - c:\windows\system32\en-us\licenses\_default\serversolutionspremium
+                                - c:\windows\system32\en-us\licenses\_default\serverstandard
+                                - c:\windows\system32\en-us\licenses\_default\serverstandardv
+                                - c:\windows\system32\en-us\licenses\_default\serverstorageenterprise
+                                - c:\windows\system32\en-us\licenses\_default\serverstorageexpress
+                                - c:\windows\system32\en-us\licenses\_default\serverstoragestandard
+                                - c:\windows\system32\en-us\licenses\_default\serverstorageworkgroup
+                                - c:\windows\system32\en-us\licenses\_default\serverweb
+                                - c:\windows\system32\en-us\licenses\_default\serverwinfoundation
+                                - c:\windows\system32\en-us\licenses\_default\serverwinsb
+                                - c:\windows\system32\en-us\licenses\_default\serverwinsbv
+                                - c:\windows\system32\en-us\licenses\eval\serverdatacenter
+                                - c:\windows\system32\en-us\licenses\eval\serverdatacenterv
+                                - c:\windows\system32\en-us\licenses\eval\serverembeddedsolution
+                                - c:\windows\system32\en-us\licenses\eval\serverenterprise
+                                - c:\windows\system32\en-us\licenses\eval\serverenterpriseia64
+                                - c:\windows\system32\en-us\licenses\eval\serverenterprisev
+                                - c:\windows\system32\en-us\licenses\eval\serveressentialadditional
+                                - c:\windows\system32\en-us\licenses\eval\serveressentialadditionalsvc
+                                - c:\windows\system32\en-us\licenses\eval\serveressentialmanagement
+                                - c:\windows\system32\en-us\licenses\eval\serveressentialmanagementsvc
+                                - c:\windows\system32\en-us\licenses\eval\serverforsbsolutions
+                                - c:\windows\system32\en-us\licenses\eval\serverforsbsolutionsem
+                                - c:\windows\system32\en-us\licenses\eval\serverfoundation
+                                - c:\windows\system32\en-us\licenses\eval\serverhomepremium
+                                - c:\windows\system32\en-us\licenses\eval\serverhomestandard
+                                - c:\windows\system32\en-us\licenses\eval\serverhpc
+                                - c:\windows\system32\en-us\licenses\eval\serverhyper
+                                - c:\windows\system32\en-us\licenses\eval\servermediumbusinessmanagement
+                                - c:\windows\system32\en-us\licenses\eval\servermediumbusinessmessaging
+                                - c:\windows\system32\en-us\licenses\eval\servermediumbusinesssecurity
+                                - c:\windows\system32\en-us\licenses\eval\serversbspremium
+                                - c:\windows\system32\en-us\licenses\eval\serversbsstandard
+                                - c:\windows\system32\en-us\licenses\eval\serversolution
+                                - c:\windows\system32\en-us\licenses\eval\serversolutionem
+                                - c:\windows\system32\en-us\licenses\eval\serversolutionspremium
+                                - c:\windows\system32\en-us\licenses\eval\serverstandard
+                                - c:\windows\system32\en-us\licenses\eval\serverstandardv
+                                - c:\windows\system32\en-us\licenses\eval\serverstorageenterprise
+                                - c:\windows\system32\en-us\licenses\eval\serverstorageexpress
+                                - c:\windows\system32\en-us\licenses\eval\serverstoragestandard
+                                - c:\windows\system32\en-us\licenses\eval\serverstorageworkgroup
+                                - c:\windows\system32\en-us\licenses\eval\serverweb
+                                - c:\windows\system32\en-us\licenses\eval\serverwinfoundation
+                                - c:\windows\system32\en-us\licenses\eval\serverwinsb
+                                - c:\windows\system32\en-us\licenses\eval\serverwinsbv
+                                - c:\windows\system32\en-us\licenses\licenses_addendum
+                                - c:\windows\system32\en-us\licenses\oem\serverdatacenter
+                                - c:\windows\system32\en-us\licenses\oem\serverdatacenterv
+                                - c:\windows\system32\en-us\licenses\oem\serverembeddedsolution
+                                - c:\windows\system32\en-us\licenses\oem\serverenterprise
+                                - c:\windows\system32\en-us\licenses\oem\serverenterpriseia64
+                                - c:\windows\system32\en-us\licenses\oem\serverenterprisev
+                                - c:\windows\system32\en-us\licenses\oem\serveressentialadditional
+                                - c:\windows\system32\en-us\licenses\oem\serveressentialadditionalsvc
+                                - c:\windows\system32\en-us\licenses\oem\serveressentialmanagement
+                                - c:\windows\system32\en-us\licenses\oem\serveressentialmanagementsvc
+                                - c:\windows\system32\en-us\licenses\oem\serverforsbsolutions
+                                - c:\windows\system32\en-us\licenses\oem\serverforsbsolutionsem
+                                - c:\windows\system32\en-us\licenses\oem\serverfoundation
+                                - c:\windows\system32\en-us\licenses\oem\serverhomepremium
+                                - c:\windows\system32\en-us\licenses\oem\serverhomestandard
+                                - c:\windows\system32\en-us\licenses\oem\serverhpc
+                                - c:\windows\system32\en-us\licenses\oem\serverhyper
+                                - c:\windows\system32\en-us\licenses\oem\servermediumbusinessmanagement
+                                - c:\windows\system32\en-us\licenses\oem\servermediumbusinessmessaging
+                                - c:\windows\system32\en-us\licenses\oem\servermediumbusinesssecurity
+                                - c:\windows\system32\en-us\licenses\oem\serversbspremium
+                                - c:\windows\system32\en-us\licenses\oem\serversbsstandard
+                                - c:\windows\system32\en-us\licenses\oem\serversolution
+                                - c:\windows\system32\en-us\licenses\oem\serversolutionem
+                                - c:\windows\system32\en-us\licenses\oem\serversolutionspremium
+                                - c:\windows\system32\en-us\licenses\oem\serverstandard
+                                - c:\windows\system32\en-us\licenses\oem\serverstandardv
+                                - c:\windows\system32\en-us\licenses\oem\serverstorageenterprise
+                                - c:\windows\system32\en-us\licenses\oem\serverstorageexpress
+                                - c:\windows\system32\en-us\licenses\oem\serverstoragestandard
+                                - c:\windows\system32\en-us\licenses\oem\serverstorageworkgroup
+                                - c:\windows\system32\en-us\licenses\oem\serverweb
+                                - c:\windows\system32\en-us\licenses\oem\serverwinfoundation
+                                - c:\windows\system32\en-us\licenses\oem\serverwinsb
+                                - c:\windows\system32\en-us\licenses\oem\serverwinsbv
+                                - c:\windows\system32\es-es
+                                - c:\windows\system32\et-ee
+                                - c:\windows\system32\fi-fi
+                                - c:\windows\system32\fr-fr
+                                - c:\windows\system32\he-il
+                                - c:\windows\system32\hr-hr
+                                - c:\windows\system32\hu-hu
+                                - c:\windows\system32\ias
+                                - c:\windows\system32\icsxml
+                                - c:\windows\system32\ime\imejp10
+                                - c:\windows\system32\ime\imejp10\applets
+                                - c:\windows\system32\ime\imekr8
+                                - c:\windows\system32\ime\imekr8\applets
+                                - c:\windows\system32\ime\imekr8\dicts
+                                - c:\windows\system32\ime\imesc5
+                                - c:\windows\system32\ime\imesc5\applets
+                                - c:\windows\system32\ime\imetc10
+                                - c:\windows\system32\ime\imetc10\applets
+                                - c:\windows\system32\ime\shared
+                                - c:\windows\system32\ime\shared\res
+                                - c:\windows\system32\it-it
+                                - c:\windows\system32\ja-jp
+                                - c:\windows\system32\ko-kr
+                                - c:\windows\system32\lt-lt
+                                - c:\windows\system32\lv-lv
+                                - c:\windows\system32\manifeststore
+                                - c:\windows\system32\migration
+                                - c:\windows\system32\migration\en-us
+                                - c:\windows\system32\migration\wsmt\rras\dlmanifests
+                                - c:\windows\system32\migration\wsmt\rras\dlmanifests\microsoft-windows-rasserver-migplu
+gin
+                                - c:\windows\system32\migration\wsmt\rras\replacementmanifests
+                                - c:\windows\system32\migration\wsmt\rras\replacementmanifests\microsoft-windows-rasapi-
+migplugin
+                                - c:\windows\system32\migration\wsmt\rras\replacementmanifests\microsoft-windows-rasserv
+er-migplugin
+                                - c:\windows\system32\migwiz
+                                - c:\windows\system32\msdtc\trace
+                                - c:\windows\system32\mui\0409
+                                - c:\windows\system32\nb-no
+                                - c:\windows\system32\networklist\icons\stockicons
+                                - c:\windows\system32\nl-nl
+                                - c:\windows\system32\oobe
+                                - c:\windows\system32\oobe\en-us
+                                - c:\windows\system32\pl-pl
+                                - c:\windows\system32\printing_admin_scripts\en-us
+                                - c:\windows\system32\pt-br
+                                - c:\windows\system32\pt-pt
+                                - c:\windows\system32\ras
+                                - c:\windows\system32\ro-ro
+                                - c:\windows\system32\ru-ru
+                                - c:\windows\system32\setup
+                                - c:\windows\system32\sk-sk
+                                - c:\windows\system32\sl-si
+                                - c:\windows\system32\slmgr\0409
+                                - c:\windows\system32\smi\schema
+                                - c:\windows\system32\speech\common
+                                - c:\windows\system32\speech\speechux
+                                - c:\windows\system32\speech\speechux\en-gb
+                                - c:\windows\system32\speech\speechux\en-us
+                                - c:\windows\system32\spool\drivers\color
+                                - c:\windows\system32\spool\drivers\x64\3\en-us
+                                - c:\windows\system32\spool\drivers\x64\3\mui\0409
+                                - c:\windows\system32\spool\prtprocs\x64
+                                - c:\windows\system32\spool\prtprocs\x64\en-us
+                                - c:\windows\system32\spool\tools\microsoft xps document writer
+                                - c:\windows\system32\spp\plugin-manifests-signed
+                                - c:\windows\system32\spp\tokens\identity
+                                - c:\windows\system32\spp\tokens\issuance
+                                - c:\windows\system32\spp\tokens\pkeyconfig
+                                - c:\windows\system32\spp\tokens\ppdlic
+                                - c:\windows\system32\spp\tokens\skus\security-spp-component-sku-serverstandard
+                                - c:\windows\system32\sppui
+                                - c:\windows\system32\sr-latn-cs
+                                - c:\windows\system32\sv-se
+                                - c:\windows\system32\sysprep
+                                - c:\windows\system32\sysprep\en-us
+                                - c:\windows\system32\th-th
+                                - c:\windows\system32\tr-tr
+                                - c:\windows\system32\uk-ua
+                                - c:\windows\system32\wbem
+                                - c:\windows\system32\wbem\en-us
+                                - c:\windows\system32\wbem\xml
+                                - c:\windows\system32\wdi\perftrack
+                                - c:\windows\system32\windowspowershell\v1.0
+                                - c:\windows\system32\windowspowershell\v1.0\en-us
+                                - c:\windows\system32\windowspowershell\v1.0\modules\adrms
+                                - c:\windows\system32\windowspowershell\v1.0\modules\adrms\en-us
+                                - c:\windows\system32\windowspowershell\v1.0\modules\applocker
+                                - c:\windows\system32\windowspowershell\v1.0\modules\applocker\en-us
+                                - c:\windows\system32\windowspowershell\v1.0\modules\bestpractices
+                                - c:\windows\system32\windowspowershell\v1.0\modules\bestpractices\en-us
+                                - c:\windows\system32\windowspowershell\v1.0\modules\bitstransfer
+                                - c:\windows\system32\windowspowershell\v1.0\modules\bitstransfer\en-us
+                                - c:\windows\system32\windowspowershell\v1.0\modules\servermanager
+                                - c:\windows\system32\windowspowershell\v1.0\modules\servermanager\en-us
+                                - c:\windows\system32\windowspowershell\v1.0\modules\troubleshootingpack
+                                - c:\windows\system32\windowspowershell\v1.0\modules\troubleshootingpack\en-us
+                                - c:\windows\system32\winrm\0409
+                                - c:\windows\system32\wlms
+                                - c:\windows\system32\wlms\en-us
+                                - c:\windows\system32\zh-cn
+                                - c:\windows\system32\zh-hk
+                                - c:\windows\system32\zh-tw
+                                - c:\windows\syswow64
+                                - c:\windows\syswow64\advancedinstallers
+                                - c:\windows\syswow64\ar-sa
+                                - c:\windows\syswow64\bg-bg
+                                - c:\windows\syswow64\com
+                                - c:\windows\syswow64\com\en-us
+                                - c:\windows\syswow64\cs-cz
+                                - c:\windows\syswow64\da-dk
+                                - c:\windows\syswow64\de-de
+                                - c:\windows\syswow64\dism
+                                - c:\windows\syswow64\dism\en-us
+                                - c:\windows\syswow64\drivers
+                                - c:\windows\syswow64\drivers\en-us
+                                - c:\windows\syswow64\driverstore\en-us
+                                - c:\windows\syswow64\el-gr
+                                - c:\windows\syswow64\en
+                                - c:\windows\syswow64\en-us
+                                - c:\windows\syswow64\en-us\licenses\_default\serverdatacenter
+                                - c:\windows\syswow64\en-us\licenses\_default\serverdatacenterv
+                                - c:\windows\syswow64\en-us\licenses\_default\serverembeddedsolution
+                                - c:\windows\syswow64\en-us\licenses\_default\serverenterprise
+                                - c:\windows\syswow64\en-us\licenses\_default\serverenterpriseia64
+                                - c:\windows\syswow64\en-us\licenses\_default\serverenterprisev
+                                - c:\windows\syswow64\en-us\licenses\_default\serveressentialadditional
+                                - c:\windows\syswow64\en-us\licenses\_default\serveressentialadditionalsvc
+                                - c:\windows\syswow64\en-us\licenses\_default\serveressentialmanagement
+                                - c:\windows\syswow64\en-us\licenses\_default\serveressentialmanagementsvc
+                                - c:\windows\syswow64\en-us\licenses\_default\serverforsbsolutions
+                                - c:\windows\syswow64\en-us\licenses\_default\serverforsbsolutionsem
+                                - c:\windows\syswow64\en-us\licenses\_default\serverfoundation
+                                - c:\windows\syswow64\en-us\licenses\_default\serverhomepremium
+                                - c:\windows\syswow64\en-us\licenses\_default\serverhomestandard
+                                - c:\windows\syswow64\en-us\licenses\_default\serverhpc
+                                - c:\windows\syswow64\en-us\licenses\_default\serverhyper
+                                - c:\windows\syswow64\en-us\licenses\_default\servermediumbusinessmanagement
+                                - c:\windows\syswow64\en-us\licenses\_default\servermediumbusinessmessaging
+                                - c:\windows\syswow64\en-us\licenses\_default\servermediumbusinesssecurity
+                                - c:\windows\syswow64\en-us\licenses\_default\serversbspremium
+                                - c:\windows\syswow64\en-us\licenses\_default\serversbsstandard
+                                - c:\windows\syswow64\en-us\licenses\_default\serversolution
+                                - c:\windows\syswow64\en-us\licenses\_default\serversolutionem
+                                - c:\windows\syswow64\en-us\licenses\_default\serversolutionspremium
+                                - c:\windows\syswow64\en-us\licenses\_default\serverstandard
+                                - c:\windows\syswow64\en-us\licenses\_default\serverstandardv
+                                - c:\windows\syswow64\en-us\licenses\_default\serverstorageenterprise
+                                - c:\windows\syswow64\en-us\licenses\_default\serverstorageexpress
+                                - c:\windows\syswow64\en-us\licenses\_default\serverstoragestandard
+                                - c:\windows\syswow64\en-us\licenses\_default\serverstorageworkgroup
+                                - c:\windows\syswow64\en-us\licenses\_default\serverweb
+                                - c:\windows\syswow64\en-us\licenses\_default\serverwinfoundation
+                                - c:\windows\syswow64\en-us\licenses\_default\serverwinsb
+                                - c:\windows\syswow64\en-us\licenses\_default\serverwinsbv
+                                - c:\windows\syswow64\en-us\licenses\eval\serverdatacenter
+                                - c:\windows\syswow64\en-us\licenses\eval\serverdatacenterv
+                                - c:\windows\syswow64\en-us\licenses\eval\serverembeddedsolution
+                                - c:\windows\syswow64\en-us\licenses\eval\serverenterprise
+                                - c:\windows\syswow64\en-us\licenses\eval\serverenterpriseia64
+                                - c:\windows\syswow64\en-us\licenses\eval\serverenterprisev
+                                - c:\windows\syswow64\en-us\licenses\eval\serveressentialadditional
+                                - c:\windows\syswow64\en-us\licenses\eval\serveressentialadditionalsvc
+                                - c:\windows\syswow64\en-us\licenses\eval\serveressentialmanagement
+                                - c:\windows\syswow64\en-us\licenses\eval\serveressentialmanagementsvc
+                                - c:\windows\syswow64\en-us\licenses\eval\serverforsbsolutions
+                                - c:\windows\syswow64\en-us\licenses\eval\serverforsbsolutionsem
+                                - c:\windows\syswow64\en-us\licenses\eval\serverfoundation
+                                - c:\windows\syswow64\en-us\licenses\eval\serverhomepremium
+                                - c:\windows\syswow64\en-us\licenses\eval\serverhomestandard
+                                - c:\windows\syswow64\en-us\licenses\eval\serverhpc
+                                - c:\windows\syswow64\en-us\licenses\eval\serverhyper
+                                - c:\windows\syswow64\en-us\licenses\eval\servermediumbusinessmanagement
+                                - c:\windows\syswow64\en-us\licenses\eval\servermediumbusinessmessaging
+                                - c:\windows\syswow64\en-us\licenses\eval\servermediumbusinesssecurity
+                                - c:\windows\syswow64\en-us\licenses\eval\serversbspremium
+                                - c:\windows\syswow64\en-us\licenses\eval\serversbsstandard
+                                - c:\windows\syswow64\en-us\licenses\eval\serversolution
+                                - c:\windows\syswow64\en-us\licenses\eval\serversolutionem
+                                - c:\windows\syswow64\en-us\licenses\eval\serversolutionspremium
+                                - c:\windows\syswow64\en-us\licenses\eval\serverstandard
+                                - c:\windows\syswow64\en-us\licenses\eval\serverstandardv
+                                - c:\windows\syswow64\en-us\licenses\eval\serverstorageenterprise
+                                - c:\windows\syswow64\en-us\licenses\eval\serverstorageexpress
+                                - c:\windows\syswow64\en-us\licenses\eval\serverstoragestandard
+                                - c:\windows\syswow64\en-us\licenses\eval\serverstorageworkgroup
+                                - c:\windows\syswow64\en-us\licenses\eval\serverweb
+                                - c:\windows\syswow64\en-us\licenses\eval\serverwinfoundation
+                                - c:\windows\syswow64\en-us\licenses\eval\serverwinsb
+                                - c:\windows\syswow64\en-us\licenses\eval\serverwinsbv
+                                - c:\windows\syswow64\en-us\licenses\licenses_addendum
+                                - c:\windows\syswow64\en-us\licenses\oem\serverdatacenter
+                                - c:\windows\syswow64\en-us\licenses\oem\serverdatacenterv
+                                - c:\windows\syswow64\en-us\licenses\oem\serverembeddedsolution
+                                - c:\windows\syswow64\en-us\licenses\oem\serverenterprise
+                                - c:\windows\syswow64\en-us\licenses\oem\serverenterpriseia64
+                                - c:\windows\syswow64\en-us\licenses\oem\serverenterprisev
+                                - c:\windows\syswow64\en-us\licenses\oem\serveressentialadditional
+                                - c:\windows\syswow64\en-us\licenses\oem\serveressentialadditionalsvc
+                                - c:\windows\syswow64\en-us\licenses\oem\serveressentialmanagement
+                                - c:\windows\syswow64\en-us\licenses\oem\serveressentialmanagementsvc
+                                - c:\windows\syswow64\en-us\licenses\oem\serverforsbsolutions
+                                - c:\windows\syswow64\en-us\licenses\oem\serverforsbsolutionsem
+                                - c:\windows\syswow64\en-us\licenses\oem\serverfoundation
+                                - c:\windows\syswow64\en-us\licenses\oem\serverhomepremium
+                                - c:\windows\syswow64\en-us\licenses\oem\serverhomestandard
+                                - c:\windows\syswow64\en-us\licenses\oem\serverhpc
+                                - c:\windows\syswow64\en-us\licenses\oem\serverhyper
+                                - c:\windows\syswow64\en-us\licenses\oem\servermediumbusinessmanagement
+                                - c:\windows\syswow64\en-us\licenses\oem\servermediumbusinessmessaging
+                                - c:\windows\syswow64\en-us\licenses\oem\servermediumbusinesssecurity
+                                - c:\windows\syswow64\en-us\licenses\oem\serversbspremium
+                                - c:\windows\syswow64\en-us\licenses\oem\serversbsstandard
+                                - c:\windows\syswow64\en-us\licenses\oem\serversolution
+                                - c:\windows\syswow64\en-us\licenses\oem\serversolutionem
+                                - c:\windows\syswow64\en-us\licenses\oem\serversolutionspremium
+                                - c:\windows\syswow64\en-us\licenses\oem\serverstandard
+                                - c:\windows\syswow64\en-us\licenses\oem\serverstandardv
+                                - c:\windows\syswow64\en-us\licenses\oem\serverstorageenterprise
+                                - c:\windows\syswow64\en-us\licenses\oem\serverstorageexpress
+                                - c:\windows\syswow64\en-us\licenses\oem\serverstoragestandard
+                                - c:\windows\syswow64\en-us\licenses\oem\serverstorageworkgroup
+                                - c:\windows\syswow64\en-us\licenses\oem\serverweb
+                                - c:\windows\syswow64\en-us\licenses\oem\serverwinfoundation
+                                - c:\windows\syswow64\en-us\licenses\oem\serverwinsb
+                                - c:\windows\syswow64\en-us\licenses\oem\serverwinsbv
+                                - c:\windows\syswow64\es-es
+                                - c:\windows\syswow64\et-ee
+                                - c:\windows\syswow64\fi-fi
+                                - c:\windows\syswow64\fr-fr
+                                - c:\windows\syswow64\he-il
+                                - c:\windows\syswow64\hr-hr
+                                - c:\windows\syswow64\hu-hu
+                                - c:\windows\syswow64\icsxml
+                                - c:\windows\syswow64\ime\imejp10
+                                - c:\windows\syswow64\ime\imejp10\applets
+                                - c:\windows\syswow64\ime\imekr8
+                                - c:\windows\syswow64\ime\imekr8\applets
+                                - c:\windows\syswow64\ime\imekr8\dicts
+                                - c:\windows\syswow64\ime\imesc5
+                                - c:\windows\syswow64\ime\imesc5\applets
+                                - c:\windows\syswow64\ime\imetc10
+                                - c:\windows\syswow64\ime\imetc10\applets
+                                - c:\windows\syswow64\ime\shared
+                                - c:\windows\syswow64\ime\shared\res
+                                - c:\windows\syswow64\installshield
+                                - c:\windows\syswow64\installshield\setupdir\0003
+                                - c:\windows\syswow64\installshield\setupdir\0005
+                                - c:\windows\syswow64\installshield\setupdir\0006
+                                - c:\windows\syswow64\installshield\setupdir\0007
+                                - c:\windows\syswow64\installshield\setupdir\0008
+                                - c:\windows\syswow64\installshield\setupdir\0009
+                                - c:\windows\syswow64\installshield\setupdir\000a
+                                - c:\windows\syswow64\installshield\setupdir\000b
+                                - c:\windows\syswow64\installshield\setupdir\000e
+                                - c:\windows\syswow64\installshield\setupdir\0010
+                                - c:\windows\syswow64\installshield\setupdir\0011
+                                - c:\windows\syswow64\installshield\setupdir\0012
+                                - c:\windows\syswow64\installshield\setupdir\0013
+                                - c:\windows\syswow64\installshield\setupdir\0014
+                                - c:\windows\syswow64\installshield\setupdir\0015
+                                - c:\windows\syswow64\installshield\setupdir\0019
+                                - c:\windows\syswow64\installshield\setupdir\001a
+                                - c:\windows\syswow64\installshield\setupdir\001b
+                                - c:\windows\syswow64\installshield\setupdir\001d
+                                - c:\windows\syswow64\installshield\setupdir\001e
+                                - c:\windows\syswow64\installshield\setupdir\001f
+                                - c:\windows\syswow64\installshield\setupdir\0021
+                                - c:\windows\syswow64\installshield\setupdir\0024
+                                - c:\windows\syswow64\installshield\setupdir\002d
+                                - c:\windows\syswow64\installshield\setupdir\0404
+                                - c:\windows\syswow64\installshield\setupdir\040c
+                                - c:\windows\syswow64\installshield\setupdir\0416
+                                - c:\windows\syswow64\installshield\setupdir\0804
+                                - c:\windows\syswow64\installshield\setupdir\0816
+                                - c:\windows\syswow64\installshield\setupdir\0c0c
+                                - c:\windows\syswow64\it-it
+                                - c:\windows\syswow64\ja-jp
+                                - c:\windows\syswow64\ko-kr
+                                - c:\windows\syswow64\lt-lt
+                                - c:\windows\syswow64\lv-lv
+                                - c:\windows\syswow64\manifeststore
+                                - c:\windows\syswow64\migration
+                                - c:\windows\syswow64\migration\en-us
+                                - c:\windows\syswow64\migration\wsmt\rras\dlmanifests
+                                - c:\windows\syswow64\migration\wsmt\rras\dlmanifests\microsoft-windows-rasserver-migplu
+gin
+                                - c:\windows\syswow64\migration\wsmt\rras\replacementmanifests
+                                - c:\windows\syswow64\migration\wsmt\rras\replacementmanifests\microsoft-windows-rasapi-
+migplugin
+                                - c:\windows\syswow64\migration\wsmt\rras\replacementmanifests\microsoft-windows-rasserv
+er-migplugin
+                                - c:\windows\syswow64\migwiz
+                                - c:\windows\syswow64\msdtc\trace
+                                - c:\windows\syswow64\mui\0409
+                                - c:\windows\syswow64\nb-no
+                                - c:\windows\syswow64\networklist\icons\stockicons
+                                - c:\windows\syswow64\nl-nl
+                                - c:\windows\syswow64\oobe
+                                - c:\windows\syswow64\pl-pl
+                                - c:\windows\syswow64\printing_admin_scripts\en-us
+                                - c:\windows\syswow64\pt-br
+                                - c:\windows\syswow64\pt-pt
+                                - c:\windows\syswow64\ras
+                                - c:\windows\syswow64\ro-ro
+                                - c:\windows\syswow64\ru-ru
+                                - c:\windows\syswow64\setup
+                                - c:\windows\syswow64\sk-sk
+                                - c:\windows\syswow64\sl-si
+                                - c:\windows\syswow64\slmgr\0409
+                                - c:\windows\syswow64\speech\common
+                                - c:\windows\syswow64\speech\speechux
+                                - c:\windows\syswow64\speech\speechux\en-us
+                                - c:\windows\syswow64\spp\tokens\pkeyconfig
+                                - c:\windows\syswow64\spp\tokens\ppdlic
+                                - c:\windows\syswow64\sppui
+                                - c:\windows\syswow64\sr-latn-cs
+                                - c:\windows\syswow64\sv-se
+                                - c:\windows\syswow64\th-th
+                                - c:\windows\syswow64\tr-tr
+                                - c:\windows\syswow64\uk-ua
+                                - c:\windows\syswow64\wbem
+                                - c:\windows\syswow64\wbem\en-us
+                                - c:\windows\syswow64\wbem\xml
+                                - c:\windows\syswow64\wdi\perftrack
+                                - c:\windows\syswow64\windowspowershell\v1.0
+                                - c:\windows\syswow64\windowspowershell\v1.0\en-us
+                                - c:\windows\syswow64\windowspowershell\v1.0\modules\bitstransfer
+                                - c:\windows\syswow64\windowspowershell\v1.0\modules\bitstransfer\en-us
+                                - c:\windows\syswow64\windowspowershell\v1.0\modules\troubleshootingpack
+                                - c:\windows\syswow64\windowspowershell\v1.0\modules\troubleshootingpack\en-us
+                                - c:\windows\syswow64\winrm\0409
+                                - c:\windows\syswow64\zh-cn
+                                - c:\windows\syswow64\zh-hk
+                                - c:\windows\syswow64\zh-tw
+                                - c:\windows\web\wallpaper\windows
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+        * WRITER "ASR Writer"
+                - Writer ID   = {be000cbe-11fe-4426-9c58-531aa6355fc4}
+                - Writer instance ID = {1e5deef5-0c64-446b-82ae-d39f3ad98063}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_IF_CAN_REPLACE
+                - Requires reboot after restore = TRUE
+                - Excluded files:
+                + Component "ASR Writer:\ASR\ASR"
+                        - Name: ASR
+                        - Logical path: ASR
+                        - Full path: \ASR\ASR
+                        - Caption: ASR
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Volumes\Volume{b962429e-03d6-11e6-be1f-806e6f6e6963}"
+                        - Name: Volume{b962429e-03d6-11e6-be1f-806e6f6e6963}
+                        - Logical path: Volumes
+                        - Full path: \Volumes\Volume{b962429e-03d6-11e6-be1f-806e6f6e6963}
+                        - Caption: Select this volume (\??\Volume{b962429e-03d6-11e6-be1f-806e6f6e6963}) if it is a crit
+ical volume.
+Critical volumes are those which ASR must restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Volumes\Volume{54922f02-0417-11e6-9133-000c29b3a9f0}"
+                        - Name: Volume{54922f02-0417-11e6-9133-000c29b3a9f0}
+                        - Logical path: Volumes
+                        - Full path: \Volumes\Volume{54922f02-0417-11e6-9133-000c29b3a9f0}
+                        - Caption: Select this volume (G:) if it is a critical volume.
+Critical volumes are those which ASR must restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Volumes\Volume{54922efb-0417-11e6-9133-000c29b3a9f0}"
+                        - Name: Volume{54922efb-0417-11e6-9133-000c29b3a9f0}
+                        - Logical path: Volumes
+                        - Full path: \Volumes\Volume{54922efb-0417-11e6-9133-000c29b3a9f0}
+                        - Caption: Select this volume (F:) if it is a critical volume.
+Critical volumes are those which ASR must restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Volumes\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}"
+                        - Name: Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}
+                        - Logical path: Volumes
+                        - Full path: \Volumes\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}
+                        - Caption: Select this volume (C:) if it is a critical volume.
+Critical volumes are those which ASR must restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Volumes\Volume{54922f09-0417-11e6-9133-000c29b3a9f0}"
+                        - Name: Volume{54922f09-0417-11e6-9133-000c29b3a9f0}
+                        - Logical path: Volumes
+                        - Full path: \Volumes\Volume{54922f09-0417-11e6-9133-000c29b3a9f0}
+                        - Caption: Select this volume (H:) if it is a critical volume.
+Critical volumes are those which ASR must restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Volumes\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}"
+                        - Name: Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}
+                        - Logical path: Volumes
+                        - Full path: \Volumes\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}
+                        - Caption: Select this volume (E:) if it is a critical volume.
+Critical volumes are those which ASR must restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Disks\harddisk1"
+                        - Name: harddisk1
+                        - Logical path: Disks
+                        - Full path: \Disks\harddisk1
+                        - Caption: Select to include disk #1 (of signature 0xb9ddaa41) for ASR restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\Disks\harddisk0"
+                        - Name: harddisk0
+                        - Logical path: Disks
+                        - Full path: \Disks\harddisk0
+                        - Caption: Select to include disk #0 (of signature 0xe9db3bae) for ASR restore.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                        - Volumes affected by this component:
+                        - Component Dependencies:
+                + Component "ASR Writer:\BCD\BCD"
+                        - Name: BCD
+                        - Logical path: BCD
+                        - Full path: \BCD\BCD
+                        - Caption: This is the path to the boot BCD store and the boot managers.
+All the files in this directory need to be backed up.
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - \\?\Volume{b962429e-03d6-11e6-be1f-806e6f6e6963}\Boot
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429e-03d6-11e6-be1f-806e6f6e6963}\ []
+                        - Component Dependencies:
+
+        * WRITER "Shadow Copy Optimization Writer"
+                - Writer ID   = {4dc3bdd4-ab48-4d07-adb0-3bee2926fd7f}
+                - Writer instance ID = {6aa4418e-194a-4330-b5d5-34db22c92c37}
+                - Supports restore events = TRUE
+                - Writer restore conditions = VSS_WRE_UNDEFINED
+                - Restore method = VSS_RME_UNDEFINED
+                - Requires reboot after restore = FALSE
+                - Excluded files:
+
+        * WRITER "BITS Writer"
+                - Writer ID   = {4969d978-be47-48b0-b100-f328f07ac1e0}
+                - Writer instance ID = {addaa8dc-b436-40a7-8073-be404cbd872e}
+                - Supports restore events = TRUE
+                - Writer restore conditions = VSS_WRE_UNDEFINED
+                - Restore method = VSS_RME_UNDEFINED
+                - Requires reboot after restore = FALSE
+                - Excluded files:
+                        - Exclude: Path = C:\Windows\System32, Filespec = bits.log
+                        - Exclude: Path = C:\Windows\System32, Filespec = bits.bak
+                        - Exclude: Path = C:\ProgramData\Microsoft\Network\Downloader\, Filespec = *
+
+        * WRITER "Registry Writer"
+                - Writer ID   = {afbab4a2-367d-4d15-a586-71dbb18f8485}
+                - Writer instance ID = {e1141cee-83cf-47df-bc7b-f283270a6f09}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE
+                - Requires reboot after restore = TRUE
+                - Excluded files:
+                        - Exclude: Path = C:\Windows\system32\config, Filespec = default.LOG
+                        - Exclude: Path = C:\Windows\system32\config, Filespec = SAM.LOG
+                        - Exclude: Path = C:\Windows\system32\config, Filespec = SECURITY.LOG
+                        - Exclude: Path = C:\Windows\system32\config, Filespec = software.LOG
+                        - Exclude: Path = C:\Windows\system32\config, Filespec = system.LOG
+                        - Exclude: Path = C:\Windows\System32\SMI\Store\Machine, Filespec = schema.dat.LOG
+                        - Exclude: Path = C:\Windows\system32\config, Filespec = COMPONENTS.LOG
+                + Component "Registry Writer:\Registry"
+                        - Name: Registry
+                        - Logical path:
+                        - Full path: \Registry
+                        - Caption: Registry
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\Windows\System32\SMI\Store\Machine
+                                - C:\Windows\system32\config
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+        * WRITER "COM+ REGDB Writer"
+                - Writer ID   = {542da469-d3e1-473c-9f4f-7847f01fc64f}
+                - Writer instance ID = {451bda14-6635-44a7-a5d2-8f0dcd952e57}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE
+                - Requires reboot after restore = FALSE
+                - Excluded files:
+                + Component "COM+ REGDB Writer:\COM+ REGDB"
+                        - Name: COM+ REGDB
+                        - Logical path:
+                        - Full path: \COM+ REGDB
+                        - Caption: COM+ REGDB
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: TRUE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\Windows\Registration
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+        * WRITER "WMI Writer"
+                - Writer ID   = {a6ad56c2-b509-4e6c-bb19-49d8f43532f0}
+                - Writer instance ID = {f76336ad-476d-496f-82ab-80952eaa2f2e}
+                - Supports restore events = FALSE
+                - Writer restore conditions = VSS_WRE_NEVER
+                - Restore method = VSS_RME_RESTORE_AT_REBOOT
+                - Requires reboot after restore = TRUE
+                - Excluded files:
+                + Component "WMI Writer:\WMI"
+                        - Name: WMI
+                        - Logical path:
+                        - Full path: \WMI
+                        - Caption: Windows Managment Instrumentation
+                        - Type: VSS_CT_FILEGROUP [2]
+                        - Is selectable: FALSE
+                        - Is top level: TRUE
+                        - Notify on backup complete: FALSE
+                        - Paths affected by this component:
+                                - C:\Windows\system32\wbem\repository
+                        - Volumes affected by this component:
+                                - \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                        - Component Dependencies:
+
+Number of writers listed: 10
+
+DISKSHADOW> /h
+
+The following is a list of DiskShadow commands. For more information about a command, type the command name.
+All inputs in the form of <inputText> must be replaced with parameters or environment variable aliases.
+
+LIST WRITERS        - List all writers on the computer.
+LIST SHADOWS        - List all volume shadow copies on the computer.
+LIST PROVIDERS      - List all VSS providers on the computer.
+
+SET                 - List all current option settings and all DiskShadow aliases that are in the environment variable s
+ettings.
+SET CONTEXT         - Set the shadow copy context.
+SET OPTION          - Set options regarding the shadow copy and autorecovery.
+SET VERBOSE         - Change verbose output mode for DiskShadow.
+SET METADATA        - Specify the name of a .cab file to store metadata for transportable shadow copies.
+
+SIMULATE RESTORE    - Simulate a restore operation.
+
+LOAD METADATA       - Load a Backup Components Document before importing a transportable shadow copy or performing a res
+tore operation.
+
+IMPORT              - Import shadow copies based on the metadata specified in a previous LOAD command.
+
+WRITER VERIFY       - Specify that the backup or restore operation must fail if the writer or component is not included.
+
+WRITER EXCLUDE      - Excludes a writer or component from backup or restore.
+
+ADD                 - List currently added aliases and volumes.
+ADD ALIAS           - Add an alias.
+ADD VOLUME          - Add a volume to the shadow copy creation set.
+ADD SHADOW          - Add a shadow copy to the recovery set.
+
+CREATE              - Create a volume shadow copy set.
+
+EXEC                - Execute the specified shell command script.
+
+BEGIN BACKUP        - Begin a full backup.
+BEGIN RESTORE       - Begin a restore.
+
+END BACKUP          - Ends a full backup.
+END RESTORE         - Ends a restore.
+
+EXPOSE              - Expose a shadow copy.
+
+UNEXPOSE            - Unexpose a shadow copy.
+
+REVERT              - Revert a shadow copy.
+
+RESYNC              - Hardware shadow copy revert.
+
+BREAK               - Break a shadow copy.
+
+MASK                - Hide an imported hardware shadow copy from the system.
+
+DELETE SHADOWS      - Delete shadow copies.
+
+RESET               - Reset DiskShadow to its original state.
+
+EXIT                - Exits DiskShadow.
+
+
+DISKSHADOW> unexpose
+
+UNEXPOSE { <shadowID> | <drive letter> | <mount point> | <share> }
+
+        Unexpose a shadow copy that was exposed by using the EXPOSE command.
+        The exposed shadow copy can be referred to in the following ways.
+
+        <shadowID>              The shadow copy ID or a currently defined alias for it.
+        <drive letter>          Exposed to a drive letter like "p:".
+        <mount point>           An exposed mountpoint, in the form "c:\existingDir\mounted\" or "m:\".
+        <share>                 Remotely exposed to a share like "ShareName" .
+
+        Example: UNEXPOSE p:
+
+DISKSHADOW> unexpose p:
+Shadow copy ID {9cc68f86-f367-47b9-9f51-50ee113442c1} is no longer exposed.
+
+DISKSHADOW> unexpose q:
+Shadow copy ID {e8254c9a-5517-4d95-8aef-468a5f74b274} is no longer exposed.
+
+DISKSHADOW> expose
+
+EXPOSE <shadowId> {<drive letter> | <share> | <mount point>}
+
+        Expose the specified shadow copy in the specified location.
+        It provides a convenient way to read information from the shadow copy.
+        Shadow copies are read-only so the exposed volume will be read only.
+        This can be done as part of a backup script.
+
+        <shadowId>              Must specify a shadow copy ID.
+        <drive letter>          Expose to a drive letter like p:
+        <share>                 Expose to a share like SharedShadowCopy
+        <mount point>           Expose to a volume mount point like c:\mountpoint\
+
+        Example: EXPOSE %VSS_SHADOW_1% p:
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 4
+
+DISKSHADOW> expose {6562ae31-81de-4de6-9272-ff02acee62d5} p:
+The shadow copy was successfully exposed as p:\.
+
+DISKSHADOW> unexpose p:
+Shadow copy ID {6562ae31-81de-4de6-9272-ff02acee62d5} is no longer exposed.
+
+DISKSHADOW> set context persistent nowriters
+
+DISKSHADOW> set metadata c:\diskshadowdata\example.cab
+
+DISKSHADOW> set metadata c:\diskshadowdata\vss-01-metadata.cab
+The existing file will be overwritten.
+
+DISKSHADOW> set verbose on
+
+DISKSHADOW> begin backup
+
+DISKSHADOW> add volume e: alias Data1GVol
+
+DISKSHADOW> create
+
+Alias Data1GVol for shadow ID {072ce697-1de2-4c7a-9417-8ab15fb02b73} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {67816dbf-7590-4a7c-966e-68dcf0524c8f} set as environment variable.
+Inserted file Manifest.xml into .cab file vss-01-metadata.cab
+Inserted file Dis1A35.tmp into .cab file vss-01-metadata.cab
+
+Querying all shadow copies with the shadow copy set ID {67816dbf-7590-4a7c-966e-68dcf0524c8f}
+
+        * Shadow copy ID = {072ce697-1de2-4c7a-9417-8ab15fb02b73}               %Data1GVol%
+                - Shadow copy set: {67816dbf-7590-4a7c-966e-68dcf0524c8f}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:24:21
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 1
+
+DISKSHADOW> end backup
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {072ce697-1de2-4c7a-9417-8ab15fb02b73}               %Data1GVol%
+                - Shadow copy set: {67816dbf-7590-4a7c-966e-68dcf0524c8f}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:24:21
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 5
+
+DISKSHADOW> begin backup
+
+DISKSHADOW> add volume e:
+
+DISKSHADOW> create
+Excluding writer "Shadow Copy Optimization Writer", because all of its components have been excluded.
+Excluding writer "BITS Writer", because all of its components have been excluded.
+Component "\TasksStore" from writer "Task Scheduler Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+Component "\WriterMetadataStore" from writer "VSS Metadata Store Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+Component "\PerformanceCounters" from writer "Performance Counters Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+Component "\System Files" from writer "System Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+Component "\BCD\BCD" from writer "ASR Writer" is excluded from backup,
+because it requires volume  which is not in the shadow copy set.
+Component "\Registry" from writer "Registry Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+Component "\COM+ REGDB" from writer "COM+ REGDB Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+Component "\WMI" from writer "WMI Writer" is excluded from backup,
+because it requires volume C:\ which is not in the shadow copy set.
+The writer "Task Scheduler Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+The writer "VSS Metadata Store Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+The writer "Performance Counters Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+The writer "System Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+The writer "ASR Writer" is now entirely excluded from the backup because the top-level
+non selectable component "\BCD\BCD" is excluded.
+The writer "Registry Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+The writer "COM+ REGDB Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+The writer "WMI Writer" is now entirely excluded from the backup,
+because it does not contain any components that can be included.
+
+Alias VSS_SHADOW_1 for shadow ID {49c81843-1368-4a3d-a536-e57307291647} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {acb2b430-40f7-4ce1-9083-14ee3394e4a4} set as environment variable.
+Inserted file Manifest.xml into .cab file vss-01-metadata.cab
+Inserted file BCDocument.xml into .cab file vss-01-metadata.cab
+Inserted file WM0.xml into .cab file vss-01-metadata.cab
+Inserted file WM1.xml into .cab file vss-01-metadata.cab
+Inserted file WM2.xml into .cab file vss-01-metadata.cab
+Inserted file WM3.xml into .cab file vss-01-metadata.cab
+Inserted file WM4.xml into .cab file vss-01-metadata.cab
+Inserted file WM5.xml into .cab file vss-01-metadata.cab
+Inserted file WM6.xml into .cab file vss-01-metadata.cab
+Inserted file WM7.xml into .cab file vss-01-metadata.cab
+Inserted file WM8.xml into .cab file vss-01-metadata.cab
+Inserted file WM9.xml into .cab file vss-01-metadata.cab
+Inserted file Dis1A35.tmp into .cab file vss-01-metadata.cab
+
+Querying all shadow copies with the shadow copy set ID {acb2b430-40f7-4ce1-9083-14ee3394e4a4}
+
+        * Shadow copy ID = {49c81843-1368-4a3d-a536-e57307291647}               %VSS_SHADOW_1%
+                - Shadow copy set: {acb2b430-40f7-4ce1-9083-14ee3394e4a4}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:26:33
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy6
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  Auto_Release Differential
+
+Number of shadow copies listed: 1
+
+DISKSHADOW> end backup
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {072ce697-1de2-4c7a-9417-8ab15fb02b73}               %Data1GVol%
+                - Shadow copy set: {67816dbf-7590-4a7c-966e-68dcf0524c8f}       <No Alias>
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:24:21
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 5
+
+DISKSHADOW> expose {072ce697-1de2-4c7a-9417-8ab15fb02b73} p:
+The shadow copy was successfully exposed as p:\.
+
+DISKSHADOW> begin backup
+
+DISKSHADOW> set context persistent nowriters
+
+DISKSHADOW> set metadata c:\diskshadowdata\example.cab
+
+DISKSHADOW> begin backup
+
+DISKSHADOW> add volume e:
+
+DISKSHADOW> create
+
+Alias VSS_SHADOW_1 for shadow ID {2ec15c27-800e-4547-a84f-1400f373e930} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {fab1d908-5bac-4e0e-9abe-331445fa08e1} set as environment variable.
+Inserted file Manifest.xml into .cab file example.cab
+Inserted file Dis1A35.tmp into .cab file example.cab
+
+Querying all shadow copies with the shadow copy set ID {fab1d908-5bac-4e0e-9abe-331445fa08e1}
+
+        * Shadow copy ID = {2ec15c27-800e-4547-a84f-1400f373e930}               %VSS_SHADOW_1%
+                - Shadow copy set: {fab1d908-5bac-4e0e-9abe-331445fa08e1}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:30:45
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy7
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 1
+
+DISKSHADOW> end backup
+
+DISKSHADOW> list shadows all
+
+Querying all shadow copies on the computer ...
+
+        * Shadow copy ID = {e8254c9a-5517-4d95-8aef-468a5f74b274}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {6562ae31-81de-4de6-9272-ff02acee62d5}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy4
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {072ce697-1de2-4c7a-9417-8ab15fb02b73}               %Data1GVol%
+                - Shadow copy set: {67816dbf-7590-4a7c-966e-68dcf0524c8f}       <No Alias>
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:24:21
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Exposed locally as: p:\
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {2ec15c27-800e-4547-a84f-1400f373e930}               %VSS_SHADOW_1%
+                - Shadow copy set: {fab1d908-5bac-4e0e-9abe-331445fa08e1}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{54922ef0-0417-11e6-9133-000c29b3a9f0}\ [E:\]
+                - Creation time: 2016-04-17 15:30:45
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy7
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {9cc68f86-f367-47b9-9f51-50ee113442c1}               <No Alias>
+                - Shadow copy set: {0cbc3bb8-3d86-4ce7-b04b-ce485b59b2c3}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:01:00
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+        * Shadow copy ID = {0c860584-86d3-47e2-8d58-ac0f4a7210fe}               <No Alias>
+                - Shadow copy set: {3a9e4272-d09b-4af0-bcad-62dd168d5a4e}       <No Alias>
+                - Original count of shadow copies = 2
+                - Original volume name: \\?\Volume{b962429f-03d6-11e6-be1f-806e6f6e6963}\ [C:\]
+                - Creation time: 2016-04-17 15:04:07
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3
+                - Originating machine: WIN-GJE551ACT59
+                - Service machine: WIN-GJE551ACT59
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 6
+
+DISKSHADOW> unexpose p:
+Shadow copy ID {072ce697-1de2-4c7a-9417-8ab15fb02b73} is no longer exposed.
+
+DISKSHADOW> expose %VSS_SHADOW_1% p:
+-> %VSS_SHADOW_1% = {2ec15c27-800e-4547-a84f-1400f373e930}
+The shadow copy was successfully exposed as p:\.
+
+DISKSHADOW>
+
+DISKSHADOW>
+
+DISKSHADOW> exit
+PS C:\Users\Administrator\Documents\abd-lab03> diskshadow
+Microsoft DiskShadow version 1.0
+Copyright (C) 2007 Microsoft Corporation
+On computer:  WIN-GJE551ACT59,  2016-04-17 15:32:43
+
+
+DISKSHADOW> load metadata c:/diskshadowdata/example.cab
+The data could not be extracted from the metadata file. Please use a cab file generated by Diskshadow.
+
+DISKSHADOW> load metadata c:\diskshadowdata\example.cab
+Alias Data1GVol for value {072ce697-1de2-4c7a-9417-8ab15fb02b73} set as an environment variable.
+Alias VSS_SHADOW_SET for value {fab1d908-5bac-4e0e-9abe-331445fa08e1} set as an environment variable.
+Alias VSS_SHADOW_1 for value {2ec15c27-800e-4547-a84f-1400f373e930} set as an environment variable.
+
+DISKSHADOW> revert %VSS_SHADOW_SET%
+-> %VSS_SHADOW_SET% = {fab1d908-5bac-4e0e-9abe-331445fa08e1}
+
+COM call "lvssObject->GetSnapshotProperties" failed.
+
+The last operation failed.
+        - Returned HRESULT: 80042308
+        - Error text: VSS_E_OBJECT_NOT_FOUND
+
+DISKSHADOW> revert %VSS_SHADOW_1%
+-> %VSS_SHADOW_1% = {2ec15c27-800e-4547-a84f-1400f373e930}
+Reverting to shadow copy ID {2ec15c27-800e-4547-a84f-1400f373e930} on volume \\?\Volume{54922ef0-0417-11e6-9133-000c29b3
+a9f0}\ from provider {b5946137-7b9f-4925-af80-51abd60b20d5}. Shadow copy attributes: [0x00120019]...
+The volume was successfully reverted to the shadow copy.
+The shadow copy is deleted.
+
+DISKSHADOW>
