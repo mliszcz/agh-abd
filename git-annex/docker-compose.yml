@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+
+  hostA:
+    # server
+    image: git-annex
+    build: .
+    hostname: hostA
+    command: /usr/sbin/sshd -De
+
+  hostB:
+    # client
+    image: git-annex
+    build: .
+    hostname: hostB
+    command: /usr/sbin/sshd -De
