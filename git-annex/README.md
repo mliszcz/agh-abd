@@ -46,7 +46,7 @@ TODO do przemyslenia:
     jednoznaczne z clone'em.
 * nie inicjalizowac annexa w backup-server i backup-disk
   (pracujemy tylko w backup-local) ??
-  * Inicjalizacja powinna być wszędzie. Każde repo powinno mieć obsługę annexa. 
+  * Inicjalizacja powinna być wszędzie. Każde repo powinno mieć obsługę annexa.
 * wszystkie poza backup-local powinny byc --bare
   * Wręcz przeciwnie, wszystkie powinny być zwykłymi repozytoriami. No może
     oprócz tego w gitlab.com.
@@ -174,7 +174,7 @@ cat test.txt
    git@hostB:~$ cd hostB-main.git
    git@hostB:hostB-main.git$ git annex init 'hostB - main'
    git@hostB:hostB-main.git$ git remote add hostA-main git@hostA:hostA-main.git
-   git@hostB:hostB-main.git$ git pull hostA-main master
+   git@hostB:hostB-main.git$ git pull hostA-main master # nie zadziala dopoki nie ma commitow na master
 
    git@hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
    ```
@@ -199,18 +199,18 @@ cat test.txt
    git@hostB:hostB-main.git$ cat important_file.txt
    important big file
    git@hostB:hostB-main.git$ git annex whereis important_file.txt
-   whereis important_file.txt (2 copies) 
+   whereis important_file.txt (2 copies)
        bad498fb-e968-467a-98a8-c59fd7800932 -- hostA-main (hostA - main)
        f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- here (hostB - main)
    ok
 
    git@hostA:hostA-main.git$ git annex whereis important_file.txt
-   whereis important_file.txt (1 copy) 
+   whereis important_file.txt (1 copy)
        bad498fb-e968-467a-98a8-c59fd7800932 -- here (hostA - main)
    ok
    git@hostA:hostA-main.git$ git annex sync
    git@hostA:hostA-main.git$ git annex whereis important_file.txt
-   whereis important_file.txt (2 copies) 
+   whereis important_file.txt (2 copies)
        bad498fb-e968-467a-98a8-c59fd7800932 -- here (hostA - main)
        f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- hostB-main (hostB - main)
    ok
@@ -218,7 +218,7 @@ cat test.txt
 
 4. Zmodyfikuj zawartość pliku w hostB-main i zweryfikuj jak rozprzestrzeniają
    się zmiany.
-   
+
    ```bash
    git@hostB:hostB-main.git$ echo " modified" >> important_file.txt
    bash: important_file.txt: Permission denied
@@ -232,18 +232,18 @@ cat test.txt
    total 4
    lrwxrwxrwx 1 git git 178 May 19 10:55 important_file.txt -> .git/annex/objects/wG/2j/SHA256-s29--ac1d39fe5ee700d3b1bd2b464fd4dc47b847a4e8dd6d796451ba5ca836cce2e3/SHA256-s29--ac1d39fe5ee700d3b1bd2b464fd4dc47b847a4e8dd6d796451ba5ca836cce2e3
    git@hostB:hostB-main.git$ git annex whereis important_file.txt
-   whereis important_file.txt (1 copy) 
+   whereis important_file.txt (1 copy)
        f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- here (hostB - main)
    ok
 
    git@hostA:hostA-main.git$ git annex whereis important_file.txt
-   whereis important_file.txt (2 copies) 
+   whereis important_file.txt (2 copies)
        bad498fb-e968-467a-98a8-c59fd7800932 -- here (hostA - main)
        f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- hostB-main (hostB - main)
    ok
    git@hostA:hostA-main.git$ git annex sync
    git@hostA:hostA-main.git$ git annex whereis important_file.txt
-   whereis important_file.txt (1 copy) 
+   whereis important_file.txt (1 copy)
        f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- hostB-main (hostB - main)
    ok
    ```
@@ -274,10 +274,10 @@ cat test.txt
    copy large.bin (to hostB-media...) ok
    (Recording state in git...)
    git@hostB:hostB-main.git$ git annex copy large.bin hostA-main
-   copy large.bin (checking hostA-main...) (to hostA-main...) 
+   copy large.bin (checking hostA-main...) (to hostA-main...)
    SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
       512000000 100%   83.22MB/s    0:00:05 (xfer#1, to-check=0/1)
-   
+
    sent 512062644 bytes  received 31 bytes  78778873.08 bytes/sec
    total size is 512000000  speedup is 1.00
    ok
@@ -289,13 +289,14 @@ cat test.txt
 
    Dodaj wpis `numcopies = 2` w sekcji [annex] w .git/config.
    ```bash
+   git@hostB:hostB-main.git$ git config annex.numcopies 2 # konfig sie nie propaguje przy sync-u
    git@hostB:hostB-main.git$ git annex copy important_file.txt --to hostA-main
    git@hostB:hostB-main.git$ git annex drop important_file.txt
-   drop important_file.txt (checking hostA-main...) (unsafe) 
+   drop important_file.txt (checking hostA-main...) (unsafe)
      Could only verify the existence of 1 out of 2 necessary copies
-   
+
      No other repository is known to contain the file.
-   
+
      (Use --force to override this check, or adjust annex.numcopies.)
    failed
    git-annex: drop: 1 failed

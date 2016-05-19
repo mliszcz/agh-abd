@@ -14,7 +14,8 @@ RUN yum -y install \
 
 ENV RSA1_KEY=/etc/ssh/ssh_host_key \
     RSA_KEY=/etc/ssh/ssh_host_rsa_key \
-    DSA_KEY=/etc/ssh/ssh_host_dsa_key
+    DSA_KEY=/etc/ssh/ssh_host_dsa_key \
+    TERM=xterm
 
 RUN /usr/bin/ssh-keygen -q -t rsa1 -f $RSA1_KEY -C '' -N '' && \
     /usr/bin/ssh-keygen -q -t rsa -f $RSA_KEY -C '' -N '' && \
