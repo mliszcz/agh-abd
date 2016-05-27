@@ -147,6 +147,8 @@ cat test.txt
 
 ## Możliwy przebieg laborki
 
+1. Konfiguracja maszyn, instalacja paczek
+
 1. Skonfiguruj dwie maszyny wirtualne centos6 z zainstalowanymi odpowiednimi
    paczkami.
    Maszyny niech będą dostępne dla siebie pod nazwami `hostA` i `hostB`.
@@ -161,7 +163,7 @@ cat test.txt
    git@hostB:~$ cat 'git' | ssh-copy-id git@hostA
    ```
 
-2. Utwórz na obu maszynach repozytoria `hostA-main` i `hostB-main` (gdzie
+1. Utwórz na obu maszynach repozytoria `hostA-main` i `hostB-main` (gdzie
    prefiks oznacza maszynę, na której dane repozytorium powinno się znajdować).
    Remote'y maszyn powinny nawzajem na siebie wskazywać.
 
@@ -179,7 +181,7 @@ cat test.txt
    git@hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
    ```
 
-3. W repozytorium hostA-main utwórz plik 'important_file.txt' i dodaj go do
+1. W repozytorium hostA-main utwórz plik 'important_file.txt' i dodaj go do
    indeksu git-annex.
    Uzyskaj dostęp do zawartości pliku na maszynie hostB.
    Zweryfikuj gdzie znajduje się aktualnie plik z hostA i hostB.
@@ -216,7 +218,7 @@ cat test.txt
    ok
    ```
 
-4. Zmodyfikuj zawartość pliku w hostB-main i zweryfikuj jak rozprzestrzeniają
+1. Zmodyfikuj zawartość pliku w hostB-main i zweryfikuj jak rozprzestrzeniają
    się zmiany.
 
    ```bash
@@ -263,7 +265,7 @@ cat test.txt
    git@hostB:hostB-main.git$ git annex sync
    ```
 
-6. Utwórz plik o wielkości 500MB w hostB-main.
+1. Utwórz plik o wielkości 500MB w hostB-main.
    Zbadaj szybkość transferu do hostA-main i hostB-media.
 
    ```bash
@@ -283,7 +285,7 @@ cat test.txt
    ok
    ```
 
-7. Zbadaj działanie flagi numcopies.
+1. Zbadaj działanie flagi numcopies.
    Zwróć uwagę na to, że wersja git-annex dostępna w repozytorium centos6 nie
    implementuje jeszcze polecenia `numcopies`.
 
@@ -301,3 +303,68 @@ cat test.txt
    failed
    git-annex: drop: 1 failed
    ```
+
+1. Redundantny backup z użyciem numcopies
+
+```bash
+git init repo1
+git init repo2
+git init repo3
+
+cd repo1/ && git annex init 'repo1' && cd ..
+cd repo2/ && git annex init 'repo2' && cd ..
+cd repo3/ && git annex init 'repo3' && cd ..
+
+[git@hostA repo1]$ git remote add repo2 ../repo2
+[git@hostA repo1]$ git remote add repo3 ../repo3
+
+[git@hostA repo1]$ git config annex.numcopies 2
+[git@hostA repo1]$ echo "test" > plik.txt
+[git@hostA repo1]$ git annex add plik.txt
+
+[git@hostA repo1]$ git annex copy plik.txt --to repo2
+[git@hostA repo1]$ git annex copy plik.txt --to repo3
+[git@hostA repo1]$ git annex drop --force plik.txt
+
+[git@hostA repo1]$ git annex whereis plik.txt
+whereis plik.txt (2 copies)
+  	18778a38-99ce-46c6-b1d4-f180b08dffc2 -- repo3
+   	9156dca9-bfc2-4853-aa02-08935c5292ee -- repo2
+ok
+[git@hostA repo1]$ git annex get --auto
+[git@hostA repo1]$ git annex whereis plik.txt
+whereis plik.txt (2 copies)
+  	18778a38-99ce-46c6-b1d4-f180b08dffc2 -- repo3
+   	9156dca9-bfc2-4853-aa02-08935c5292ee -- repo2
+ok
+
+# sa dwie kopie, get --auto nie zrobil kopii lokalnej
+
+# awaria repo2 (mozna je np. usunac z dysku)
+# remote nie ruszamy poki nie zrobimy 'dead'
+
+[git@hostA repo1]$ git annex dead repo2
+dead  repo2 ok
+(Recording state in git...)
+[git@hostA repo1]$ git annex whereis plik.txt
+whereis plik.txt (1 copy)
+  	18778a38-99ce-46c6-b1d4-f180b08dffc2 -- repo3
+ok
+[git@hostA repo1]$
+
+# teraz mozna usunac repo2 (git remote rm repo2)
+# lub mozna je zostawic - jezeli je odzyskamy to
+# git annex semitrust repo2
+
+[git@hostA repo1]$ git annex get --auto
+get plik.txt (from repo3...) ok
+(Recording state in git...)
+[git@hostA repo1]$ git annex whereis plik.txt
+whereis plik.txt (2 copies)
+  	18778a38-99ce-46c6-b1d4-f180b08dffc2 -- repo3
+   	df10361e-af01-40dc-a65c-24373a46967e -- here (repo1)
+ok
+[git@hostA repo1]$
+
+# get --auto utworzyl kopie lokalnie (numcopies = 2)
+```
