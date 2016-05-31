@@ -76,6 +76,12 @@ yum upgrade ca-certificates
 wget http://download.fedoraproject.org/pub/epel/6/x86_64/ \
      epel-release-6-8.noarch.rpm
 rpm -ivh epel-release-6-8.noarch.rpm
+
+hostA:~$ ssh-keygen
+hostA:~$ cat 'root123' | ssh-copy-id root@hostB
+
+hostB:~$ ssh-keygen
+hostB:~$ cat 'root123' | ssh-copy-id root@hostA
     \end{lstlisting}
 \fi
 
@@ -88,8 +94,8 @@ rpm -ivh epel-release-6-8.noarch.rpm
     Sprawdź czy z każdej maszyny możesz zalogować się na drugą z nich:
 
     \begin{lstlisting}
-git@hostA:~$ ssh git@hostB
-git@hostB:~$ ssh git@hostA
+hostA:~$ ssh hostB
+hostB:~$ ssh hostA
     \end{lstlisting}
 
     \item
@@ -99,14 +105,28 @@ git@hostB:~$ ssh git@hostA
     git-annex i dodaj drugie repozytorium jako remote.
 
     \begin{lstlisting}
-git@hostA:~$ git init hostA-main.git
-git@hostA:~$ cd hostA-main.git
-git@hostA:hostA-main.git$ git annex init 'hostA - main'
-
+hostA:~$ git init hostA-main.git
+hostA:~$ cd hostA-main.git
+hostA:hostA-main.git$ git annex init 'hostA - main'
 ...
-
-git@hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
+hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
     \end{lstlisting}
+
+\ifteacher
+    \begin{lstlisting}
+hostA:~$ git init hostA-main.git
+hostA:~$ cd hostA-main.git
+hostA:hostA-main.git$ git annex init 'hostA - main'
+
+hostB:~$ git init hostB-main.git
+hostB:~$ cd hostB-main.git
+hostB:hostB-main.git$ git annex init 'hostB - main'
+hostB:hostB-main.git$ git remote add hostA-main root@hostA:hostA-main.git
+hostB:hostB-main.git$ git pull hostA-main master # nie zadziala dopoki nie ma commitow na master
+
+hostA:hostA-main.git$ git remote add hostB-main root@hostB:hostB-main.git
+    \end{lstlisting}
+\fi
 
     \item
     W repozytorium \texttt{hostA-main} utwórz plik \texttt{important\_file.txt}
@@ -114,9 +134,74 @@ git@hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
     maszynie \texttt{hostB}. Zweryfikuj gdzie znajduje się aktualnie plik z
     \texttt{hostA} i \texttt{hostB}.
 
+\ifteacher
+    \begin{lstlisting}
+hostA:hostA-main.git$ echo "important big file" > important_file.txt
+hostA:hostA-main.git$ git annex add important_file.txt
+hostA:hostA-main.git$ git commit -m "important_file"
+
+hostB:hostB-main.git$ git annex sync
+hostB:hostB-main.git$ ll
+total 4
+lrwxrwxrwx 1 git git 178 May 19 10:18 important_file.txt -> .git/annex/objects/3J/Z8/SHA256-s19--ac2b10210a29d0275fec27792ecbc2b641669cfc76b0a36b2a7062de274ecf31/SHA256-s19--ac2b10210a29d0275fec27792ecbc2b641669cfc76b0a36b2a7062de274ecf31
+hostB:hostB-main.git$ cat important_file.txt
+cat: important_file.txt: No such file or directory
+hostB:hostB-main.git$ git annex get important_file.txt
+hostB:hostB-main.git$ cat important_file.txt
+important big file
+hostB:hostB-main.git$ git annex whereis important_file.txt
+whereis important_file.txt (2 copies)
+    bad498fb-e968-467a-98a8-c59fd7800932 -- hostA-main (hostA - main)
+    f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- here (hostB - main)
+ok
+
+hostA:hostA-main.git$ git annex whereis important_file.txt
+whereis important_file.txt (1 copy)
+    bad498fb-e968-467a-98a8-c59fd7800932 -- here (hostA - main)
+ok
+hostA:hostA-main.git$ git annex sync
+hostA:hostA-main.git$ git annex whereis important_file.txt
+whereis important_file.txt (2 copies)
+    bad498fb-e968-467a-98a8-c59fd7800932 -- here (hostA - main)
+    f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- hostB-main (hostB - main)
+ok
+    \end{lstlisting}
+\fi
+
     \item
     Zmodyfikuj zawartość pliku w \texttt{hostB-main} i zweryfikuj jak
     rozprzestrzeniają się zmiany.
+
+\ifteacher
+    \begin{lstlisting}
+hostB:hostB-main.git$ echo " modified" >> important_file.txt
+bash: important_file.txt: Permission denied
+hostB:hostB-main.git$ git annex unlock important_file.txt
+hostB:hostB-main.git$ ll
+total 4
+-rw-r--r-- 1 git git 20 May 19 10:55 important_file.txt
+hostB:hostB-main.git$ echo " modified" >> important_file.txt
+hostB:hostB-main.git$ git commit important_file.txt -m "Modified important_file.txt"
+hostB:hostB-main.git$ ll
+total 4
+lrwxrwxrwx 1 git git 178 May 19 10:55 important_file.txt -> .git/annex/objects/wG/2j/SHA256-s29--ac1d39fe5ee700d3b1bd2b464fd4dc47b847a4e8dd6d796451ba5ca836cce2e3/SHA256-s29--ac1d39fe5ee700d3b1bd2b464fd4dc47b847a4e8dd6d796451ba5ca836cce2e3
+hostB:hostB-main.git$ git annex whereis important_file.txt
+whereis important_file.txt (1 copy)
+    f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- here (hostB - main)
+ok
+
+hostA:hostA-main.git$ git annex whereis important_file.txt
+whereis important_file.txt (2 copies)
+    bad498fb-e968-467a-98a8-c59fd7800932 -- here (hostA - main)
+    f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- hostB-main (hostB - main)
+ok
+hostA:hostA-main.git$ git annex sync
+hostA:hostA-main.git$ git annex whereis important_file.txt
+whereis important_file.txt (1 copy)
+    f0c9f4ba-7550-40ce-9eb0-a325b991d306 -- hostB-main (hostB - main)
+ok
+    \end{lstlisting}
+\fi
 
     \item
     Utwórz kolejne repozytorium \texttt{hostB-backup}.
@@ -130,6 +215,13 @@ hostB$ fdisk /dev/sdb -> utworzenie nowej partycji
 hostB$ mkfs.ext4 /dev/sdb1
 hostB$ mkdir /mnt/backup
 hostB$ mount /dev/sdb1 /mnt/backup
+
+hostB:/mnt/backup$ git init hostB-backup.git
+hostB:/mnt/backup$ cd hostB-backup.git
+hostB:hostB-backup.git$ git annex init 'hostB - backup'
+
+hostB:hostB-main.git$ git remote add hostB-backup /mnt/backup/hostB-backup.git
+hostB:hostB-main.git$ git annex sync
     \end{lstlisting}
 \fi
 
@@ -150,6 +242,12 @@ hostB$ mount /dev/sdb1 /mnt/backup
     \end{tabular}
 
 \ifteacher
+    \begin{lstlisting}
+hostB:hostB-main.git$ dd if=/dev/zero of=large.bin bs=1024 count=500000
+hostB:hostB-main.git$ git annex add large.bin
+hostB:hostB-main.git$ git commit -m "Added large.bin"
+    \end{lstlisting}
+
     Przykładowe wyniki:
 
     \begin{lstlisting}
@@ -187,6 +285,22 @@ ok
         \item Spróbuj porzucić plik lokalnie i obserwuj wyniki.
     \end{itemize}
 
+\ifteacher
+    \begin{lstlisting}
+hostB:hostB-main.git$ git config annex.numcopies 2 # config sie nie propaguje przy sync'u
+hostB:hostB-main.git$ git annex copy important_file.txt --to hostA-main
+hostB:hostB-main.git$ git annex drop important_file.txt
+drop important_file.txt (checking hostA-main...) (unsafe)
+  Could only verify the existence of 1 out of 2 necessary copies
+
+  No other repository is known to contain the file.
+
+  (Use --force to override this check, or adjust annex.numcopies.)
+failed
+git-annex: drop: 1 failed
+    \end{lstlisting}
+\fi
+
     \item
     Umieść plik z poprzedniego punktu w dwóch zdalnych repozytoriach i porzuć
     lokalną kopię. Spróbuj pobrać ją z flagą \texttt{get --auto}. Zasymuluj
@@ -216,6 +330,8 @@ ok
 
 \ifteacher
     \begin{lstlisting}
+hostB-backup.git$ echo "asdfasd" >> .git/annex/objects/aa/SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+
 hostB-main.git$ git annex fsck --from hostB-backup plik.bin
 fsck plik.bin Bad file size (7 B larger); dropped from hostB-backup
 
