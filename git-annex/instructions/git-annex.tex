@@ -11,10 +11,15 @@
 \title{\textbf{Instrukcja do ćwiczenia}\\git-annex}
 \author{Michał Liszcz \and Jakub Sawicki}
 \newif\ifteacher
-\teacherfalse
+\teachertrue
 \begin{document}
 \maketitle
 
+\ifteacher
+{\centering \Large wersja dla prowadzącego
+
+}
+\else
 \begin{tabular}{|l|p{.7\textwidth}|}
 \hline
 Data wykonania & \\
@@ -30,6 +35,7 @@ Ocena & \\
 
 \noindent Przed przystąpieniem do ćwiczenia sprawdź obecność i stan sprzętu.
 Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
+\fi
 \vspace{0.5cm}
 
 \renewcommand{\labelenumi}{$\Box$~\texttt{\theenumi}}
@@ -67,7 +73,8 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
     \begin{lstlisting}
 yum upgrade ca-certificates
 
-wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+wget http://download.fedoraproject.org/pub/epel/6/x86_64/ \
+     epel-release-6-8.noarch.rpm
 rpm -ivh epel-release-6-8.noarch.rpm
     \end{lstlisting}
 \fi
