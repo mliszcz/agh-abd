@@ -70,7 +70,7 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
     nazwami \texttt{hostA} i \texttt{hostB}.
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 yum upgrade ca-certificates
 
 wget http://download.fedoraproject.org/pub/epel/6/x86_64/ \
@@ -113,7 +113,7 @@ hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
     \end{lstlisting}
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 hostA:~$ git init hostA-main.git
 hostA:~$ cd hostA-main.git
 hostA:hostA-main.git$ git annex init 'hostA - main'
@@ -122,7 +122,7 @@ hostB:~$ git init hostB-main.git
 hostB:~$ cd hostB-main.git
 hostB:hostB-main.git$ git annex init 'hostB - main'
 hostB:hostB-main.git$ git remote add hostA-main root@hostA:hostA-main.git
-hostB:hostB-main.git$ git pull hostA-main master # nie zadziala dopoki nie ma commitow na master
+hostB:hostB-main.git$ git pull hostA-main master
 
 hostA:hostA-main.git$ git remote add hostB-main root@hostB:hostB-main.git
     \end{lstlisting}
@@ -135,7 +135,7 @@ hostA:hostA-main.git$ git remote add hostB-main root@hostB:hostB-main.git
     \texttt{hostA} i \texttt{hostB}.
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 hostA:hostA-main.git$ echo "important big file" > important_file.txt
 hostA:hostA-main.git$ git annex add important_file.txt
 hostA:hostA-main.git$ git commit -m "important_file"
@@ -173,7 +173,7 @@ ok
     rozprzestrzeniają się zmiany.
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 hostB:hostB-main.git$ echo " modified" >> important_file.txt
 bash: important_file.txt: Permission denied
 hostB:hostB-main.git$ git annex unlock important_file.txt
@@ -210,7 +210,7 @@ ok
     \texttt{/mnt/backup}).
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 hostB$ fdisk /dev/sdb -> utworzenie nowej partycji
 hostB$ mkfs.ext4 /dev/sdb1
 hostB$ mkdir /mnt/backup
@@ -242,15 +242,14 @@ hostB:hostB-main.git$ git annex sync
     \end{tabular}
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 hostB:hostB-main.git$ dd if=/dev/zero of=large.bin bs=1024 count=500000
 hostB:hostB-main.git$ git annex add large.bin
 hostB:hostB-main.git$ git commit -m "Added large.bin"
-    \end{lstlisting}
 
-    Przykładowe wyniki:
+# wyniki: 45MBps SSH, 115MBps LOCAL
 
-    \begin{lstlisting}
+
 [root@lab429-08 hostB-main.git]# git annex copy --to hostA-main plik.bin
 copy plik.bin (checking hostA-main...) (to hostA-main...) SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
 512000000 100\% 45.98MB/s 0:00:10 (xfer#1, to-check=0/1)
@@ -286,8 +285,8 @@ ok
     \end{itemize}
 
 \ifteacher
-    \begin{lstlisting}
-hostB:hostB-main.git$ git config annex.numcopies 2 # config sie nie propaguje przy sync'u
+    \begin{lstlisting}[frame=single, caption=Wynik]
+hostB:hostB-main.git$ git config annex.numcopies 2
 hostB:hostB-main.git$ git annex copy important_file.txt --to hostA-main
 hostB:hostB-main.git$ git annex drop important_file.txt
 drop important_file.txt (checking hostA-main...) (unsafe)
@@ -309,7 +308,7 @@ git-annex: drop: 1 failed
     pobrać go do lokalnego repozytorium z użyciem flagi \texttt{--auto}?.
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 [root@lab429-08 hostB-main.git]# git annex get --auto plik.bin
 get plik.bin (from hostB-backup...) SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
 512000000 100\% 56.26MB/s 0:00:08 (xfer#1, to-check=0/1)
@@ -329,7 +328,7 @@ ok
     usunięcia z systemu i odtworzenia poprawnej kopii.
 
 \ifteacher
-    \begin{lstlisting}
+    \begin{lstlisting}[frame=single, caption=Wynik]
 hostB-backup.git$ echo "asdfasd" >> .git/annex/objects/aa/SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
 
 hostB-main.git$ git annex fsck --from hostB-backup plik.bin
@@ -360,7 +359,7 @@ ok
     Gitlab wspiera tylko autentykację przy użyciu klucza publicznego. Dodaj
     w panelu ustawień konta klucz wygenerowany na początku ćwiczenia.
     Utwórz repozytorium i dodaj je jako remote do istniejącego repozytorium.
-    Zsynchronizuj status git-annex. Zbadaj szybkość transferu 50MB pliku do
+    Zsynchronizuj status git-annex. Zbadaj szybkość transferu 500MB pliku do
     Gitlab.com, do drugiej maszyny w sieci lokalnej i do repozytorium na tej
     samej maszynie.
 
@@ -375,6 +374,47 @@ ok
     Gitlab.com & \\
     \hline
     \end{tabular}
+
+\ifteacher
+    \begin{lstlisting}[frame=single, caption=Wynik]
+# logujemy sie w gitlab.com -> Profile -> Profile Settings -> SSH Keys
+# (https://gitlab.com/profile/keys)
+# kopiujemy w pole KEY zawartosc pliku ~/.ssh/id_rsa.pub
+# wynik: 15MBps UP, 10MBps DOWN - gitlab.com
+
+[root@lab429-07 hostA-main.git]# git remote add gitlab git@gitlab.com:mliszcz/git-annex-abd-lab.git
+
+
+[root@lab429-07 hostA-main.git]# git annex copy plik.bin --to gitlab
+The authenticity of host 'gitlab.com (104.210.2.228)' can't be established.
+RSA key fingerprint is b6:03:0e:39:97:9e:d0:e7:24:ce:a3:77:3e:01:42:09.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'gitlab.com,104.210.2.228' (RSA) to the list of known hosts.
+copy plik.bin (checking gitlab...) (to gitlab...)
+SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+   512000000 100%   14.85MB/s    0:00:32 (xfer#1, to-check=0/1)
+
+sent 512062644 bytes  received 31 bytes  9226354.50 bytes/sec
+total size is 512000000  speedup is 1.00
+ok
+(Recording state in git...)
+
+
+[root@lab429-07 hostA-main.git]# git annex whereis plik.bin
+whereis plik.bin (1 copy)
+      4aad61d8-90a4-4e3d-8b33-2c2891eb8de0 -- gitlab
+ok
+[root@lab429-07 hostA-main.git]# git annex get plik.bin
+get plik.bin (from gitlab...)
+SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+   512000000 100%    9.17MB/s    0:00:53 (xfer#1, to-check=0/1)
+
+sent 42 bytes  received 512125148 bytes  8327238.86 bytes/sec
+total size is 512000000  speedup is 1.00
+ok
+(Recording state in git...)
+    \end{lstlisting}
+\fi
 
 \end{enumerate}
 
