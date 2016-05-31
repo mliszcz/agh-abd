@@ -5,26 +5,13 @@
 \usepackage{a4wide}
 \usepackage{color}
 \usepackage{latexsym}
-%\usepackage[dvips]{graphicx}
-%\usepackage[dvips]{epsfig}
-%\usepackage{url}
 \usepackage{listings}
-
 \usepackage{hyperref}
-
-\definecolor{uxgray}{gray}{0.75}
-\newcommand{\uxcmd}[1]{\colorbox{uxgray}{\scalebox{0.6}[0.9]{\texttt{#1}}}}
-\newcommand{\ipbox}[0]{\_\_\_.\_\_\_.\_\_\_.\_\_\_}
-\newcommand{\tleft}[1]{
-\begin{flushleft}
-#1
-\end{flushleft}
-}
-
-%\newenvironment {titemize}{\begin{itemize} \setlength{\itemsep}{-\parsep} } {\end{itemize}}
 
 \title{\textbf{Instrukcja do ćwiczenia}\\git-annex}
 \author{Michał Liszcz \and Jakub Sawicki}
+\newif\ifteacher
+\teacherfalse
 \begin{document}
 \maketitle
 
@@ -59,19 +46,31 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
 
     \item
     Skonfiguruj dwie maszyny wirtualne \texttt{centos6} z zainstalowanymi
-    natępującymi paczkami (git-annex dostępny jest w repozytorium EPEL,
-    `yum install epel-release`, pozostałe są w standardowych repozytoriach):
+    następującymi paczkami (git-annex dostępny jest w repozytorium EPEL
+    \footnote{CentOS6.2 dostępny w laboratorium nie posiada go w repozytorium.
+        Konieczne jest ściągnięcie i zainstalowanie paczki
+        \texttt{epel-release-6-8.noarch}. Pomocne może być także uaktualnienie
+        certyfikatów: \texttt{yum upgrade ca-certificates}.},
+    pozostałe są w standardowych repozytoriach):
 
     \begin{itemize}
-
       \item git >= 1.7.1
-      \item rsync >= 3.0.6
-      \item openssh-server >= 5.3p1
+      %\item rsync >= 3.0.6
+      %\item openssh-server >= 5.3p1
       \item git-annex >= 3.20120522
     \end{itemize}
 
     Dodaj w pliku \texttt{/etc/hosts} wpisy, by maszyny były dostępne pod
     nazwami \texttt{hostA} i \texttt{hostB}.
+
+\ifteacher
+    \begin{lstlisting}
+yum upgrade ca-certificates
+
+wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+rpm -ivh epel-release-6-8.noarch.rpm
+    \end{lstlisting}
+\fi
 
     \item
     Na obu maszynach skonfiguruj serwer SSH, utwórz użytkownika \texttt{git}
@@ -82,8 +81,8 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
     Sprawdź czy z każdej maszyny możesz zalogować się na drugą z nich:
 
     \begin{lstlisting}
-        git@hostA:~$ ssh git@hostB
-        git@hostB:~$ ssh git@hostA
+git@hostA:~$ ssh git@hostB
+git@hostB:~$ ssh git@hostA
     \end{lstlisting}
 
     \item
@@ -93,14 +92,13 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
     git-annex i dodaj drugie repozytorium jako remote.
 
     \begin{lstlisting}
-        git@hostA:~$ git init hostA-main.git
-        git@hostA:~$ cd hostA-main.git
-        git@hostA:hostA-main.git$ git annex init 'hostA - main'
+git@hostA:~$ git init hostA-main.git
+git@hostA:~$ cd hostA-main.git
+git@hostA:hostA-main.git$ git annex init 'hostA - main'
 
-        ...
+...
 
-        git@hostA:hostA-main.git$ git remote add \
-            hostB-main git@hostB:hostB-main.git
+git@hostA:hostA-main.git$ git remote add hostB-main git@hostB:hostB-main.git
     \end{lstlisting}
 
     \item
@@ -114,22 +112,60 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
     rozprzestrzeniają się zmiany.
 
     \item
-    Utwórz kolejne repozytorium \texttt{hostB-media}. Może to być repozytorium,
-    które przechowywane będzie na przykład na dysku backupowym
-    \texttt{/dev/sdb}.
+    Utwórz kolejne repozytorium \texttt{hostB-backup}.
+    Powinno to być repozytorium, które przechowywane będzie na dysku backupowym
+    \texttt{/dev/sdb} (utwórz odpowiednią partycję i zamontuj w
+    \texttt{/mnt/backup}).
+
+\ifteacher
+    \begin{lstlisting}
+hostB$ fdisk /dev/sdb -> utworzenie nowej partycji
+hostB$ mkfs.ext4 /dev/sdb1
+hostB$ mkdir /mnt/backup
+hostB$ mount /dev/sdb1 /mnt/backup
+    \end{lstlisting}
+\fi
 
     \item
-    Utwórz plik o wielkości 500MB w \texttt{hostB-main}. Zbadaj szybkość (czas)
+    Utwórz plik \texttt{plik.bin} o wielkości 500MB w \texttt{hostB-main}.
+    Zbadaj szybkość
     transferu przy kopiowaniu pliku do \texttt{hostA-main} (przez SSH) i do
     \texttt{hostB-media} (kopia lokalna).
 
     \begin{tabular}{|l|p{.7\textwidth}|}
     \hline
-    SSH & \\
+    & prędkość transferu [MB/s] \\
     \hline
-    lokalnie & \\
+    przez SSH & \\
+    \hline
+    kopia lokalna & \\
     \hline
     \end{tabular}
+
+\ifteacher
+    Przykładowe wyniki:
+
+    \begin{lstlisting}
+[root@lab429-08 hostB-main.git]# git annex copy --to hostA-main plik.bin
+copy plik.bin (checking hostA-main...) (to hostA-main...) SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+512000000 100\% 45.98MB/s 0:00:10 (xfer#1, to-check=0/1)
+
+sent 512062644 bytes received 31 bytes 48767873.81 bytes/sec
+total size is 512000000 speedup is 1.00
+ok
+(Recording state in git...)
+
+
+[root@lab429-08 hostB-main.git]# git annex copy --to hostB-backup plik.bin
+copy plik.bin (to hostB-backup...) SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+512000000 100\% 115.10MB/s 0:00:04 (xfer#1, to-check=0/1)
+
+sent 512062644 bytes received 31 bytes 113791705.56 bytes/sec
+total size is 512000000 speedup is 1.00
+ok
+(Recording state in git...)
+    \end{lstlisting}
+\fi
 
     \item
     Zbadaj działanie flagi numcopies. Zwróć uwagę na to, że wersja git-annex
@@ -151,6 +187,48 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
     git-annex. Sprawdź ile kopii pliku ustnieje w systemie. Czy teraz możesz
     pobrać go do lokalnego repozytorium z użyciem flagi \texttt{--auto}?.
 
+\ifteacher
+    \begin{lstlisting}
+[root@lab429-08 hostB-main.git]# git annex get --auto plik.bin
+get plik.bin (from hostB-backup...) SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+512000000 100\% 56.26MB/s 0:00:08 (xfer#1, to-check=0/1)
+
+sent 512062644 bytes received 31 bytes 53901334.21 bytes/sec
+total size is 512000000 speedup is 1.00
+ok
+(Recording state in git...)
+    \end{lstlisting}
+\fi
+
+    \item
+    Zasymuluj zmianę którejś z kopii pliku \texttt{plik.bin}.
+    Upewnij się, że posiadasz co najmniej dwie kopie i zmodyfikuj zawartość
+    pliku bezpośrednio w systemie plików.
+    Wykorzystaj \texttt{git-annex} do wykrycia niepoprawnej kopii, jej
+    usunięcia z systemu i odtworzenia poprawnej kopii.
+
+\ifteacher
+    \begin{lstlisting}
+hostB-main.git$ git annex fsck --from hostB-backup plik.bin
+fsck plik.bin Bad file size (7 B larger); dropped from hostB-backup
+
+Only 1 of 2 trustworthy copies exist of plik.bin
+Back it up with git-annex copy.
+failed
+(Recording state in git...)
+git-annex: fsck: 1 failed
+
+hostB-main.git$ git annex get --auto plik.bin
+get plik.bin (from hostA-main...) SHA256-s512000000--4c98cf638799a07eb85872e7f5f5d8d661c09e6e15af02f3655ed9250cae13b0
+512000000 100\% 45.54MB/s 0:00:10 (xfer#1, to-check=0/1)
+
+sent 30 bytes received 512062649 bytes 44527189.48 bytes/sec
+total size is 512000000 speedup is 1.00
+ok
+(Recording state in git...)
+    \end{lstlisting}
+\fi
+
     \item
     \textbf{Zadanie dodatkowe.} Załóż konto w serwisie
     \href{https://gitlab.com}{https://gitlab.com}
@@ -165,9 +243,11 @@ Wszelkie nieprawidłowości należy natychmiast zgłosić prowadzącemu.
 
     \begin{tabular}{|l|p{.7\textwidth}|}
     \hline
-    SSH & \\
+    & prędkość transferu [MB/s] \\
     \hline
-    lokalnie & \\
+    przez SSH & \\
+    \hline
+    kopia lokalna & \\
     \hline
     Gitlab.com & \\
     \hline
